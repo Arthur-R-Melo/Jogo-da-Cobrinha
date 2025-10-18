@@ -12,8 +12,6 @@
 #define COOLDOWN 0.2
 #define FOOD_COLOR BLUE
 
-#include "raylib.h"
-
 typedef struct Food{
     Rectangle pos;
     Color color;

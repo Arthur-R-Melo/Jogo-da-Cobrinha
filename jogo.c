@@ -7,39 +7,6 @@
 #include "snake.h"
 #include "jogo.h"
 
-int main(){
-    Jogo jogo;
-    int gameOver = 1;
-
-    //Cria a janela;
-    InitWindow(LARGURA, ALTURA, "Snake Game");
-    SetTargetFPS(60);
-    srand(time(NULL));
-    
-    IniciaJogo(&jogo);
-    while (!WindowShouldClose()){
-        BeginDrawing();
-        ClearBackground(BLACK);
-        if (gameOver){
-            DesenhaJogo(&jogo);
-            AtualizaRodada(&jogo);
-            if (ColisaoFood(&jogo)){
-                gameOver = 0;
-            }
-        } else {
-            DrawText("Agora é a sua vez!", 150, 200, 40, WHITE);
-            DrawText("Continue", 265, 400, 30, WHITE);
-            if (IsKeyPressed(KEY_ENTER)){
-                IniciaJogo(&jogo);
-                gameOver = 1;
-            }
-        }
-        EndDrawing();
-    }
-    CloseWindow();
-    return 0;
-}
-
 void IniciaBody(Jogo *j){
     j->body.pos = (Rectangle) {LARGURA/2 - STD_SIZE_X, ALTURA - STD_SIZE_Y -10, STD_SIZE_X, STD_SIZE_Y};
     j->body.direcao = 0;
