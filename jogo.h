@@ -10,7 +10,14 @@
 #define STD_SIZE_Y 40
 #define TEMPO 0.2
 #define COOLDOWN 0.2
+#define FOOD_COLOR BLUE
 
+#include "raylib.h"
+
+typedef struct Food{
+    Rectangle pos;
+    Color color;
+}Food;
 
 typedef struct Bordas{
     Rectangle pos;

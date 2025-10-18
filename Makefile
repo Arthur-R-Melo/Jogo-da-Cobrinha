@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -std=c99
-TARGET = snake
+TARGET = snake.exe
 LIBS = -lraylib -lm
 OBJS = jogo.o snake.o
 

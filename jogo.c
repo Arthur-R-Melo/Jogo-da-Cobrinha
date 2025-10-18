@@ -6,7 +6,6 @@
 
 #include "snake.h"
 #include "jogo.h"
-#include "food.h"
 
 int main(){
     Jogo jogo;
