@@ -32,10 +32,6 @@ typedef struct Jogo{
 void IniciaBordas(Jogo *j);
 void IniciaFood(Jogo *j);
 void IniciaJogo(Jogo *j);
-void DesenhaBody(Jogo *j);
-void DesenhaFood(Jogo *j);
-void DesenhaBordas(Jogo *j);
-void DesenhaJogo(Jogo *j);
 void AtualizaDirecao(Jogo *j);
 void AtualizaPosBody(Jogo *j);
 void AtualizaRodada(Jogo *j);

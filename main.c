@@ -6,6 +6,7 @@
 #include "raylib.h"
 #include "snake.h"
 #include "jogo.h"
+#include "graphic.h"
 
 #define LARGURA 660
 #define ALTURA 660
