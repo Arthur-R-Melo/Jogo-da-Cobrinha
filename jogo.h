@@ -14,7 +14,6 @@
 
 typedef struct Food{
     Coord coord;
-//    Rectangle pos;
     Color color;
 }Food;
 

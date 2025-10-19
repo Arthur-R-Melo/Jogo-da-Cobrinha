@@ -7,6 +7,8 @@
 #include "snake.h"
 #include "jogo.h"
 
+#define TAB_SIZE 16
+
 void IniciaBody(Jogo *j){
     j->body = newBody((Coord) {7, 15}, 0);
 }
@@ -24,7 +26,6 @@ void IniciaBordas(Jogo *j){
 
 void IniciaFood(Jogo *j){
     j->food.coord = (Coord) {rand()%16, rand()%16};
-//    j->food.pos = (Rectangle) {(float)(rand() % ((ALTURA - 20) / STD_SIZE_Y) * STD_SIZE_Y + 10), (float)(rand() % ((ALTURA - 20) / STD_SIZE_Y) * STD_SIZE_Y + 10), STD_SIZE_X, STD_SIZE_Y};
     j->food.color = FOOD_COLOR;
 }
 
@@ -62,19 +63,23 @@ void AtualizaPosBody(Jogo *j){
 
     if (j->body.direcao == 0){
         coord.y--;
-//        j->body.pos.y -= STD_SIZE_Y;
+        coord.y+=TAB_SIZE;
+        coord.y%=TAB_SIZE;
     }
     if (j->body.direcao == 1){
         coord.x++;
-//        j->body.pos.x += STD_SIZE_X;
+        coord.x+=TAB_SIZE;
+        coord.x%=16;
     }
     if (j->body.direcao == 2){
         coord.y++;
-//        j->body.pos.y += STD_SIZE_Y;
+        coord.y+=TAB_SIZE;
+        coord.y%=16;
     }
     if (j->body.direcao == 3){
         coord.x--;
-//        j->body.pos.x -= STD_SIZE_X;
+        coord.x+=TAB_SIZE;
+        coord.x%=16;
     }
 
     insertInHead(&(j->body), coord);
