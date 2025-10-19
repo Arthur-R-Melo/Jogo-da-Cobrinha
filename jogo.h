@@ -27,6 +27,7 @@ typedef struct Jogo{
     Bordas bordas[4];
     double tempo;
     double cooldown;
+    int gameOver;
 }Jogo;
 
 void IniciaBordas(Jogo *j);

@@ -18,7 +18,6 @@
 
 int main(){
     Jogo jogo;
-    int gameOver = 1;
 
     //Cria a janela;
     InitWindow(LARGURA, ALTURA, "Snake Game");
@@ -29,18 +28,18 @@ int main(){
     while (!WindowShouldClose()){
         BeginDrawing();
         ClearBackground(BLACK);
-        if (gameOver){
+        if (jogo.gameOver){
             DesenhaJogo(&jogo);
             AtualizaRodada(&jogo);
-            if (ColisaoFood(&jogo)){
-                gameOver = 0;
-            }
+/*            if (ColisaoFood(&jogo)){
+              jogo.gameOver = 0;
+            }*/
         } else {
             DrawText("Agora é a sua vez!", 150, 200, 40, WHITE);
             DrawText("Continue", 265, 400, 30, WHITE);
             if (IsKeyPressed(KEY_ENTER)){
                 IniciaJogo(&jogo);
-                gameOver = 1;
+                jogo.gameOver = 1;
             }
         }
         EndDrawing();

@@ -34,6 +34,7 @@ void IniciaJogo(Jogo *j){
     IniciaBody(j);
     IniciaFood(j);
     j->tempo = GetTime();
+    j->gameOver = 1;
 }
 
 
@@ -82,8 +83,17 @@ void AtualizaPosBody(Jogo *j){
         coord.x%=16;
     }
 
-    insertInHead(&(j->body), coord);
-    removeFromTail(&(j->body));
+    if (isSnakeInCoord(&(j->body), coord)){
+        j->gameOver = 0;
+        return;
+    }
+    
+    if (ColisaoFood(j))
+    {
+        growSnake(&(j->body), coord);
+    }else{
+        moveSnake(&(j->body), coord);
+    }
 }
 
 void AtualizaRodada(Jogo *j){
