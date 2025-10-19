@@ -19,13 +19,14 @@ typedef struct Node{
 typedef struct Body{
     NodePointer head;
     NodePointer tail;
-//    Rectangle pos;
-//    Color color;
     int direcao;
 }Body;
 
 Body newBody(Coord coord, int direcao);
 void insertInHead(Body* cobra, Coord coord);
 void removeFromTail(Body* cobra);
+void moveSnake(Body* cobra, Coord coord);
+void growSnake(Body* cobra, Coord coord);
+int isSnakeInCoord(Body* cobra, Coord coord);
 
 #endif

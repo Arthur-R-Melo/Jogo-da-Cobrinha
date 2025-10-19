@@ -33,3 +33,25 @@ void removeFromTail(Body* cobra){
     cobra->tail = cobra->tail->prox;
     free(temp);
 }
+
+void moveSnake(Body* cobra, Coord coord) {
+    insertInHead(cobra, coord);
+    removeFromTail(cobra);
+}
+void growSnake(Body* cobra, Coord coord){
+    insertInHead(cobra, coord);
+}
+int isSnakeInCoord(Body* cobra, Coord coord) {
+    NodePointer temp = cobra->tail;
+
+    while (temp){
+        if (compareCoord(temp->coord, coord))
+        {
+            return 1;
+        }
+        temp = temp->prox;
+    }
+
+    return 0;
+    
+}
