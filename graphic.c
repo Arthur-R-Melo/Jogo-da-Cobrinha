@@ -20,9 +20,9 @@ void DesenhaBody(Jogo *j){
         rec.height = STD_SIZE_Y;
 
         DrawRectangleRec(rec, SNAKE_COLOR);
+
+        temp = temp->prox;
     }
-    
-    //DrawRectangleRec(j->body.pos, j->body.color);
 }
 
 void DesenhaFood(Jogo *j){
@@ -35,7 +35,6 @@ void DesenhaFood(Jogo *j){
     rec.y = y;
 
     DrawRectangleRec(rec, j->food.color);
-//    DrawRectangleRec(j->food.pos, j->food.color);
 }
 
 void DesenhaBordas(Jogo *j){
