@@ -3,6 +3,8 @@
 
 #include "jogo.h"
 
+#define SNAKE_COLOR YELLOW
+
 void DesenhaBody(Jogo *j);
 void DesenhaFood(Jogo *j);
 void DesenhaBordas(Jogo *j);

@@ -13,7 +13,8 @@
 #define FOOD_COLOR BLUE
 
 typedef struct Food{
-    Rectangle pos;
+    Coord coord;
+//    Rectangle pos;
     Color color;
 }Food;
 

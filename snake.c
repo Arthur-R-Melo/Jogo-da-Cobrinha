@@ -3,6 +3,17 @@
 
 #include "snake.h"
 
+Body newBody(Coord coord, int direcao){
+    Body body;
+    body.direcao = direcao;
+    body.tail = malloc(sizeof(Node));
+    body.tail->coord = coord;
+    body.tail->prox = NULL;
+    body.head = body.tail;
+
+    return body;
+}
+
 void insertInHead(Body* cobra, Coord coord){
     NodePointer temp = malloc(sizeof(Node));
     temp->prox = NULL;

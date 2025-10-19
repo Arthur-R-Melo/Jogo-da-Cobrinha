@@ -1,13 +1,41 @@
 #include "graphic.h"
 #include "jogo.h"
+#include "snake.h"
+#include "coord.h"
 
+#include <stdio.h>
+
+void coordToPosition(Coord coord, float* x, float*y);
 
 void DesenhaBody(Jogo *j){
-    DrawRectangleRec(j->body.pos, j->body.color);
+    NodePointer temp = j->body.tail;
+    float x, y;
+    Rectangle rec;
+    while (temp)
+    {
+        coordToPosition(temp->coord, &x, &y);
+        rec.x = x;
+        rec.y = y;
+        rec.width = STD_SIZE_X;
+        rec.height = STD_SIZE_Y;
+
+        DrawRectangleRec(rec, SNAKE_COLOR);
+    }
+    
+    //DrawRectangleRec(j->body.pos, j->body.color);
 }
 
 void DesenhaFood(Jogo *j){
-    DrawRectangleRec(j->food.pos, j->food.color);
+    float x, y;
+    coordToPosition(j->food.coord, &x, &y);
+    Rectangle rec;
+    rec.width = STD_SIZE_X;
+    rec.height = STD_SIZE_Y;
+    rec.x = x;
+    rec.y = y;
+
+    DrawRectangleRec(rec, j->food.color);
+//    DrawRectangleRec(j->food.pos, j->food.color);
 }
 
 void DesenhaBordas(Jogo *j){
@@ -21,4 +49,9 @@ void DesenhaJogo(Jogo *j){
     DesenhaBordas(j);
     DesenhaBody(j);
     DesenhaFood(j);
+}
+
+void coordToPosition(Coord coord, float* x, float*y) {
+    *x = (float)(coord.x * 40 + 10);
+    *y = (float)(coord.y * 40 + 10);
 }

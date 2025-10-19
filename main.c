@@ -19,14 +19,20 @@
 int main(){
     Jogo jogo;
     int gameOver = 1;
+    printf("Teste\n");
 
     //Cria a janela;
     InitWindow(LARGURA, ALTURA, "Snake Game");
+    printf("Teste1\n");
     SetTargetFPS(60);
+    printf("Teste2\n");
     srand(time(NULL));
+    printf("Teste3\n");    
     
     IniciaJogo(&jogo);
-    while (!WindowShouldClose()){
+    printf("Teste4\n");
+    while (/*!WindowShouldClose()*/true){
+        printf("Teste5");
         BeginDrawing();
         ClearBackground(BLACK);
         if (gameOver){

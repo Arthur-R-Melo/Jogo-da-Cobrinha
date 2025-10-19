@@ -8,10 +8,8 @@
 #include "jogo.h"
 
 void IniciaBody(Jogo *j){
-    j->body.pos = (Rectangle) {LARGURA/2 - STD_SIZE_X, ALTURA - STD_SIZE_Y -10, STD_SIZE_X, STD_SIZE_Y};
-    j->body.direcao = 0;
-    j->body.color = SNAKE_COLOR;
-    }
+    j->body = newBody((Coord) {7, 15}, 0);
+}
 
 void IniciaBordas(Jogo *j){
     //Borda de cima
@@ -25,7 +23,8 @@ void IniciaBordas(Jogo *j){
 }
 
 void IniciaFood(Jogo *j){
-    j->food.pos = (Rectangle) {(float)(rand() % ((ALTURA - 20) / STD_SIZE_Y) * STD_SIZE_Y + 10), (float)(rand() % ((ALTURA - 20) / STD_SIZE_Y) * STD_SIZE_Y + 10), STD_SIZE_X, STD_SIZE_Y};
+    j->food.coord = (Coord) {rand()%16, rand()%16};
+//    j->food.pos = (Rectangle) {(float)(rand() % ((ALTURA - 20) / STD_SIZE_Y) * STD_SIZE_Y + 10), (float)(rand() % ((ALTURA - 20) / STD_SIZE_Y) * STD_SIZE_Y + 10), STD_SIZE_X, STD_SIZE_Y};
     j->food.color = FOOD_COLOR;
 }
 
@@ -59,18 +58,27 @@ void AtualizaDirecao(Jogo *j){
 
 void AtualizaPosBody(Jogo *j){
 
+    Coord coord = j->body.head->coord;
+
     if (j->body.direcao == 0){
-        j->body.pos.y -= STD_SIZE_Y;
+        coord.y--;
+//        j->body.pos.y -= STD_SIZE_Y;
     }
     if (j->body.direcao == 1){
-        j->body.pos.x += STD_SIZE_X;
+        coord.x++;
+//        j->body.pos.x += STD_SIZE_X;
     }
     if (j->body.direcao == 2){
-        j->body.pos.y += STD_SIZE_Y;
+        coord.y++;
+//        j->body.pos.y += STD_SIZE_Y;
     }
     if (j->body.direcao == 3){
-        j->body.pos.x -= STD_SIZE_X;
+        coord.x--;
+//        j->body.pos.x -= STD_SIZE_X;
     }
+
+    insertInHead(&(j->body), coord);
+    removeFromTail(&(j->body));
 }
 
 void AtualizaRodada(Jogo *j){
@@ -83,8 +91,5 @@ void AtualizaRodada(Jogo *j){
 }
 
 int ColisaoFood(Jogo *j){
-    if (CheckCollisionRecs(j->body.pos, j->food.pos)){
-        return 1;
-    }
-    return 0;
+    return compareCoord(j->body.head->coord, j->food.coord);
 }
