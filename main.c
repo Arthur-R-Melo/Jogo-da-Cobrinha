@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 #include <time.h>
 
@@ -7,6 +8,7 @@
 #include "snake.h"
 #include "jogo.h"
 #include "graphic.h"
+#include "food.h"
 
 #define LARGURA 660
 #define ALTURA 660
@@ -35,7 +37,11 @@ int main(){
               jogo.gameOver = 0;
             }*/
         } else {
-            DrawText("Agora é a sua vez!", 150, 200, 40, WHITE);
+            char texto[50];            
+            sprintf(texto, "Sua pontuacao foi: %d!", jogo.pontuacao);
+            
+            DrawText("GAME OVER!", 200, 200, 40, RED);
+            DrawText(texto, 180, 260, 30, WHITE);
             DrawText("Continue", 265, 400, 30, WHITE);
             if (IsKeyPressed(KEY_ENTER)){
                 IniciaJogo(&jogo);

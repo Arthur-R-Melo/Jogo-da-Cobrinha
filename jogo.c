@@ -5,9 +5,14 @@
 #include <time.h>
 
 #include "snake.h"
+#include "food.h"
 #include "jogo.h"
 
 #define TAB_SIZE 16
+
+void IniciaPontuacao(Jogo *j){
+    j->pontuacao = 0;
+}
 
 void IniciaBody(Jogo *j){
     j->body = newBody((Coord) {7, 15}, 0);
@@ -33,6 +38,7 @@ void IniciaJogo(Jogo *j){
     IniciaBordas(j);
     IniciaBody(j);
     IniciaFood(j);
+    IniciaPontuacao(j);
     j->tempo = GetTime();
     j->gameOver = 1;
 }
@@ -91,6 +97,12 @@ void AtualizaPosBody(Jogo *j){
     if (ColisaoFood(j))
     {
         growSnake(&(j->body), coord);
+        mudaCoordFood(j);
+        j->pontuacao++;
+        
+        //Mudança de coord food
+                
+
     }else{
         moveSnake(&(j->body), coord);
     }

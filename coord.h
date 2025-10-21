@@ -3,7 +3,7 @@
 
 typedef struct Coord{
     int x;
-    int y;
+    int y;    
 }Coord;
 
 int compareCoord(Coord a, Coord b);

@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -Wall -std=c99
 TARGET = snake.exe
 LIBS = -lraylib -lm
-OBJS = jogo.o snake.o main.o graphic.o coord.o
+OBJS = jogo.o snake.o main.o graphic.o coord.o food.o
 
 all: $(TARGET)
 
@@ -23,6 +23,9 @@ graphic.o: graphic.c graphic.h
 
 coord.o: coord.c coord.h
 	$(CC) $(CFLAGS) -c coord.c
+
+food.o: food.c food.h
+	$(CC) $(CFLAGS) -c food.c
 
 teste:
 	./$(TARGET)

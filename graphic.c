@@ -46,8 +46,8 @@ void DesenhaBordas(Jogo *j){
 
 void DesenhaJogo(Jogo *j){
     DesenhaBordas(j);
-    DesenhaBody(j);
     DesenhaFood(j);
+    DesenhaBody(j);
 }
 
 void coordToPosition(Coord coord, float* x, float*y) {
