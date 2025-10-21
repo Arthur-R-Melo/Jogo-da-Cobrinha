@@ -3,14 +3,6 @@
 
 #include "snake.h"
 
-void iniciaMatrizPosicoes(Body* body){
-    for(int i = 0; i < 16; i++){
-        for(int j = 0; j < 16; j++){
-            body->posicoes[i][j] = 0;
-        }
-    }
-}
-
 Body newBody(Coord coord, int direcao){
     Body body;
     body.direcao = direcao;
@@ -18,10 +10,6 @@ Body newBody(Coord coord, int direcao){
     body.tail->coord = coord;
     body.tail->prox = NULL;
     body.head = body.tail;
-
-    iniciaMatrizPosicoes(&body);
-
-    body.posicoes[body.tail->coord.x][body.tail->coord.y] = 1;
 
     return body;
 }
@@ -32,8 +20,6 @@ void insertInHead(Body* cobra, Coord coord){
     temp->coord = coord;
     cobra->head->prox = temp;
     cobra->head = temp;
-
-    cobra->posicoes[temp->coord.x][temp->coord.y] = 1;
 }
 
 void removeFromTail(Body* cobra){
@@ -45,9 +31,6 @@ void removeFromTail(Body* cobra){
     
     NodePointer temp = cobra->tail;
     cobra->tail = cobra->tail->prox;
-
-    cobra->posicoes[temp->coord.x][temp->coord.y] = 0;
-
     free(temp);    
 }
 
