@@ -30,7 +30,12 @@ void IniciaBordas(Jogo *j){
 }
 
 void IniciaFood(Jogo *j){
-    j->food.coord = (Coord) {rand()%16, rand()%16};
+    Coord tempCoord = (Coord) {rand()%16, rand()%16};
+    while(tempCoord.x == 7 && tempCoord.y == 15){
+        tempCoord = (Coord) {rand()%16, rand()%16};
+    }
+
+    j->food.coord = tempCoord;
     j->food.color = FOOD_COLOR;
 }
 

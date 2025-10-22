@@ -12,14 +12,14 @@
 #define COOLDOWN 0.2
 #define FOOD_COLOR BLUE
 
+typedef struct Bordas{
+    Rectangle pos;
+}Bordas;
+
 typedef struct Food{
     Coord coord;
     Color color;
 }Food;
-
-typedef struct Bordas{
-    Rectangle pos;
-}Bordas;
 
 typedef struct Jogo{
     Body body;
