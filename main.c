@@ -24,12 +24,17 @@ int main(){
     //Cria a janela;
     InitWindow(LARGURA, ALTURA, "Snake Game");
     SetTargetFPS(60);
-    srand(time(NULL));  
-    
+    srand(time(NULL)); 
+
+    Texture2D Fundo;
+    Fundo = CarregaTextureFundo(&jogo); 
+    CarregaTexturaComida(&jogo);
+
     IniciaJogo(&jogo);
     while (!WindowShouldClose()){
         BeginDrawing();
         ClearBackground(BLACK);
+        DrawTexture(Fundo, 0, 0, WHITE);
         if (jogo.gameOver){
             DesenhaJogo(&jogo);
             AtualizaRodada(&jogo);
@@ -50,6 +55,8 @@ int main(){
         }
         EndDrawing();
     }
+    DescarregaTexturaFundo(&jogo, Fundo);
+    DescarregaTexturaComida(&jogo);
     CloseWindow();
     return 0;
 }
