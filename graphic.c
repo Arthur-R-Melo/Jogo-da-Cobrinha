@@ -19,7 +19,11 @@ void DesenhaBody(Jogo *j){
         rec.width = STD_SIZE_X;
         rec.height = STD_SIZE_Y;
 
-        DrawRectangleRec(rec, SNAKE_COLOR);
+        if (temp == j->body.head) {
+            DrawRectangleRec(rec, RED);
+        } else {
+            DrawRectangleRec(rec, SNAKE_COLOR);
+        }
 
         temp = temp->prox;
     }
@@ -34,7 +38,12 @@ void DesenhaFood(Jogo *j){
     rec.x = x;
     rec.y = y;
 
-    DrawRectangleRec(rec, j->food.color);
+    DrawTexturePro(j->foodTexture.texture,
+                  (Rectangle){0, 0, j->foodTexture.texture.width, j->foodTexture.texture.height},
+                  rec,
+                  (Vector2){0, 0},
+                  0.0f,
+                  WHITE);
 }
 
 void DesenhaBordas(Jogo *j){
@@ -53,4 +62,24 @@ void DesenhaJogo(Jogo *j){
 void coordToPosition(Coord coord, float* x, float*y) {
     *x = (float)(coord.x * 40 + 10);
     *y = (float)(coord.y * 40 + 10);
+}
+
+Texture2D CarregaTextureFundo(Jogo *jogo){
+    Texture2D fundo = LoadTexture("assets/background.png");
+    return fundo;
+}
+
+void DescarregaTexturaFundo(Jogo* jogo, Texture2D fundo){
+    UnloadTexture(fundo);
+}
+
+void CarregaTexturaComida(Jogo *jogo) {
+    jogo->foodTexture.texture = LoadTexture("assets/teste.png");
+    if (jogo->foodTexture.texture.id == 0) {
+        printf("ERRO: Não foi possível carregar textura da comida!\n");
+    }
+}
+
+void DescarregaTexturaComida(Jogo *jogo) {
+        UnloadTexture(jogo->foodTexture.texture);
 }
