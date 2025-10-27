@@ -21,9 +21,14 @@ typedef struct Food{
     Color color;
 }Food;
 
+typedef struct FoodTextures{
+    Texture2D texture;
+} FoodTextures;
+
 typedef struct Jogo{
     Body body;
     Food food;
+    FoodTextures foodTexture;
     Bordas bordas[4];
     double tempo;
     double cooldown;
