@@ -11,6 +11,7 @@ typedef struct Node *NodePointer;
 typedef struct Node{
     NodePointer prox;
     Coord coord;
+    int direcao;    
 }Node;
 
 /*
@@ -19,7 +20,6 @@ typedef struct Node{
 typedef struct Body{
     NodePointer head;
     NodePointer tail;
-    int direcao;    
 }Body;
 
 Body newBody(Coord coord, int direcao);

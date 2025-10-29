@@ -51,20 +51,20 @@ void IniciaJogo(Jogo *j){
 
 void AtualizaDirecao(Jogo *j){
     //Atualiza para qual direção a cobra vai  
-    if(IsKeyDown(KEY_UP) && j->body.direcao != 2 && GetTime() - j->cooldown > COOLDOWN){
-        j->body.direcao = 0;
+    if(IsKeyDown(KEY_UP) && j->body.head->direcao != 2 && GetTime() - j->cooldown > COOLDOWN){
+        j->body.head->direcao = 0;
         j->cooldown = GetTime();
     }
-    if(IsKeyDown(KEY_RIGHT) && j->body.direcao != 3 && GetTime() - j->cooldown > COOLDOWN){
-        j->body.direcao = 1;
+    if(IsKeyDown(KEY_RIGHT) && j->body.head->direcao != 3 && GetTime() - j->cooldown > COOLDOWN){
+        j->body.head->direcao = 1;
         j->cooldown = GetTime();
     }
-    if(IsKeyDown(KEY_DOWN) && j->body.direcao != 0 && GetTime() - j->cooldown > COOLDOWN){
-        j->body.direcao = 2;
+    if(IsKeyDown(KEY_DOWN) && j->body.head->direcao != 0 && GetTime() - j->cooldown > COOLDOWN){
+        j->body.head->direcao = 2;
         j->cooldown = GetTime();
     }
-    if(IsKeyDown(KEY_LEFT) && j->body.direcao != 1 && GetTime() - j->cooldown > COOLDOWN){
-        j->body.direcao = 3;
+    if(IsKeyDown(KEY_LEFT) && j->body.head->direcao != 1 && GetTime() - j->cooldown > COOLDOWN){
+        j->body.head->direcao = 3;
         j->cooldown = GetTime();
     }
 }
@@ -73,22 +73,22 @@ void AtualizaPosBody(Jogo *j){
 
     Coord coord = j->body.head->coord;
 
-    if (j->body.direcao == 0){
+    if (j->body.head->direcao == 0){
         coord.y--;
         coord.y+=TAB_SIZE;
         coord.y%=TAB_SIZE;
     }
-    if (j->body.direcao == 1){
+    if (j->body.head->direcao == 1){
         coord.x++;
         coord.x+=TAB_SIZE;
         coord.x%=16;
     }
-    if (j->body.direcao == 2){
+    if (j->body.head->direcao == 2){
         coord.y++;
         coord.y+=TAB_SIZE;
         coord.y%=16;
     }
-    if (j->body.direcao == 3){
+    if (j->body.head->direcao == 3){
         coord.x--;
         coord.x+=TAB_SIZE;
         coord.x%=16;
