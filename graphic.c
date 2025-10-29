@@ -5,7 +5,9 @@
 
 #include <stdio.h>
 
+//Funções para uso exclusivamente interno, por isso não estão no cabeçalho
 void coordToPosition(Coord coord, float* x, float*y);
+void rotateImage(Vector2* vec, float* degree, int direction);
 
 void DesenhaBody(Jogo *j){
     NodePointer temp = j->body.tail;
@@ -14,13 +16,23 @@ void DesenhaBody(Jogo *j){
     while (temp)
     {
         coordToPosition(temp->coord, &x, &y);
+        float degree = 0.0f;
+        Vector2 position = (Vector2){0,0};
         rec.x = x;
         rec.y = y;
         rec.width = STD_SIZE_X;
         rec.height = STD_SIZE_Y;
 
+        rotateImage(&position, &degree, temp->direcao);
+
         if (temp == j->body.head) {
-            DrawRectangleRec(rec, RED);
+            //DrawRectangleRec(rec, RED);
+            DrawTexturePro(j->foodTexture.texture,
+                  (Rectangle){0, 0, j->foodTexture.texture.width, j->foodTexture.texture.height},
+                  rec,
+                  position,
+                  degree,
+                  WHITE);
         } else {
             DrawRectangleRec(rec, SNAKE_COLOR);
         }
@@ -82,4 +94,31 @@ void CarregaTexturaComida(Jogo *jogo) {
 
 void DescarregaTexturaComida(Jogo *jogo) {
         UnloadTexture(jogo->foodTexture.texture);
+}
+
+void rotateImage(Vector2* vec, float* degree, int direction) {
+
+    if (direction == DIR_UP) return;
+    
+    if (direction == DIR_DOWN) {
+        *degree = 180.0f;
+        vec->x+=STD_SIZE_X;
+        vec->y+=STD_SIZE_Y;
+
+        return;
+    }
+
+    if (direction == DIR_LEFT) {
+        *degree = -90.0f;
+        vec->x+=STD_SIZE_X;
+
+        return;
+    }
+    
+    if (direction == DIR_RIGHT) {
+        *degree = 90.0f;
+        vec->y+=STD_SIZE_Y;
+
+        return;
+    }
 }

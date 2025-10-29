@@ -11,6 +11,10 @@
 #define TEMPO 0.2
 #define COOLDOWN 0.2
 #define FOOD_COLOR BLUE
+#define DIR_UP 0
+#define DIR_RIGHT 1
+#define DIR_DOWN 2
+#define DIR_LEFT 3
 
 typedef struct Bordas{
     Rectangle pos;

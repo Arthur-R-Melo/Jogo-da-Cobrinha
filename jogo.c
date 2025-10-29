@@ -51,20 +51,20 @@ void IniciaJogo(Jogo *j){
 
 void AtualizaDirecao(Jogo *j){
     //Atualiza para qual direção a cobra vai  
-    if(IsKeyDown(KEY_UP) && j->body.head->direcao != 2 && GetTime() - j->cooldown > COOLDOWN){
-        j->body.head->direcao = 0;
+    if(IsKeyDown(KEY_UP) && j->body.head->direcao != DIR_DOWN && GetTime() - j->cooldown > COOLDOWN){
+        j->body.head->direcao = DIR_UP;
         j->cooldown = GetTime();
     }
-    if(IsKeyDown(KEY_RIGHT) && j->body.head->direcao != 3 && GetTime() - j->cooldown > COOLDOWN){
-        j->body.head->direcao = 1;
+    if(IsKeyDown(KEY_RIGHT) && j->body.head->direcao != DIR_LEFT && GetTime() - j->cooldown > COOLDOWN){
+        j->body.head->direcao = DIR_RIGHT;
         j->cooldown = GetTime();
     }
-    if(IsKeyDown(KEY_DOWN) && j->body.head->direcao != 0 && GetTime() - j->cooldown > COOLDOWN){
-        j->body.head->direcao = 2;
+    if(IsKeyDown(KEY_DOWN) && j->body.head->direcao != DIR_UP && GetTime() - j->cooldown > COOLDOWN){
+        j->body.head->direcao = DIR_DOWN;
         j->cooldown = GetTime();
     }
-    if(IsKeyDown(KEY_LEFT) && j->body.head->direcao != 1 && GetTime() - j->cooldown > COOLDOWN){
-        j->body.head->direcao = 3;
+    if(IsKeyDown(KEY_LEFT) && j->body.head->direcao != DIR_RIGHT && GetTime() - j->cooldown > COOLDOWN){
+        j->body.head->direcao = DIR_LEFT;
         j->cooldown = GetTime();
     }
 }
