@@ -61,7 +61,7 @@ void DesenhaJogo(Jogo *j){
 
 void coordToPosition(Coord coord, float* x, float*y) {
     *x = (float)(coord.x * 40 + 10);
-    *y = (float)(coord.y * 40 + 10);
+    *y = (float)(coord.y * 40 + 50);
 }
 
 Texture2D CarregaTextureFundo(Jogo *jogo){

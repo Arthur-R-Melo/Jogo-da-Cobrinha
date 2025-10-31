@@ -11,7 +11,9 @@
 #include "food.h"
 
 #define LARGURA 660
-#define ALTURA 660
+#define ALTURA_JOGO 660
+#define BARRA_ALTURA 40
+#define ALTURA_TOTAL (ALTURA_JOGO + BARRA_ALTURA)
 #define STD_SIZE_X 40
 #define STD_SIZE_Y 40
 #define TEMPO 0.2
@@ -22,7 +24,7 @@ int main(){
     Jogo jogo;
 
     //Cria a janela;
-    InitWindow(LARGURA, ALTURA, "Snake Game");
+    InitWindow(LARGURA, ALTURA_TOTAL, "Snake Game");
     SetTargetFPS(60);
     srand(time(NULL)); 
 
@@ -32,9 +34,15 @@ int main(){
 
     IniciaJogo(&jogo);
     while (!WindowShouldClose()){
-        BeginDrawing();
+        BeginDrawing();      
         ClearBackground(BLACK);
-        DrawTexture(Fundo, 0, 0, WHITE);
+        DrawTexture(Fundo, 0, BARRA_ALTURA, WHITE);
+
+        DrawRectangle(0, 0, LARGURA, BARRA_ALTURA, WHITE);
+        char pontuacao[50];            
+        sprintf(pontuacao, "Pontuação: %d", jogo.pontuacao);
+        DrawText(pontuacao, 10, 10, 20, BLACK);
+
         if (jogo.gameOver){
             DesenhaJogo(&jogo);
             AtualizaRodada(&jogo);

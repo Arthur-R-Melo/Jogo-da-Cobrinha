@@ -20,13 +20,13 @@ void IniciaBody(Jogo *j){
 
 void IniciaBordas(Jogo *j){
     //Borda de cima
-    j->bordas[0].pos = (Rectangle) {0, 0, LARGURA, 10};
+    j->bordas[0].pos = (Rectangle) {0, BARRA_ALTURA, LARGURA, 10};
     //Borda da direita
-    j->bordas[1].pos = (Rectangle) {LARGURA - 10, 0, 10, ALTURA};
+    j->bordas[1].pos = (Rectangle) {LARGURA - 10, BARRA_ALTURA, 10, ALTURA_JOGO};
     //Borda de baixo
-    j->bordas[2].pos = (Rectangle) {0, ALTURA - 10, LARGURA, 10};
+    j->bordas[2].pos = (Rectangle) {0, ALTURA_TOTAL-10, LARGURA, 10};
     //Borda da esquerda
-    j->bordas[3].pos = (Rectangle) {0, 0, 10, ALTURA};
+    j->bordas[3].pos = (Rectangle) {0, BARRA_ALTURA, 10, ALTURA_JOGO};
 }
 
 void IniciaFood(Jogo *j){

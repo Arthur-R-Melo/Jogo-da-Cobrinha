@@ -5,7 +5,9 @@
 #include "snake.h"
 
 #define LARGURA 660
-#define ALTURA 660
+#define ALTURA_JOGO 660
+#define BARRA_ALTURA 40
+#define ALTURA_TOTAL (ALTURA_JOGO + BARRA_ALTURA)
 #define STD_SIZE_X 40
 #define STD_SIZE_Y 40
 #define TEMPO 0.2
