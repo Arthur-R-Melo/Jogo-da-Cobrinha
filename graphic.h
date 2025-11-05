@@ -13,5 +13,7 @@ void CarregaTexturaComida(Jogo *jogo);
 void DescarregaTexturaComida(Jogo *jogo);
 Texture2D CarregaTextureFundo(Jogo *jogo);
 void DescarregaTexturaFundo(Jogo* jogo, Texture2D fundo);
+void CarregaQuinaCobra(Jogo* jogo);
+void DescarregaQuinaCobra(Jogo* jogo);
 
 #endif

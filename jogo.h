@@ -13,6 +13,10 @@
 #define TEMPO 0.2
 #define COOLDOWN 0.2
 #define FOOD_COLOR BLUE
+#define DIR_UP 0
+#define DIR_RIGHT 1
+#define DIR_DOWN 2
+#define DIR_LEFT 3
 
 typedef struct Bordas{
     Rectangle pos;
@@ -31,6 +35,7 @@ typedef struct Jogo{
     Body body;
     Food food;
     FoodTextures foodTexture;
+    Texture2D quinaCobra;
     Bordas bordas[4];
     double tempo;
     double cooldown;

@@ -31,6 +31,7 @@ int main(){
     Texture2D Fundo;
     Fundo = CarregaTextureFundo(&jogo); 
     CarregaTexturaComida(&jogo);
+    CarregaQuinaCobra(&jogo);
 
     IniciaJogo(&jogo);
     while (!WindowShouldClose()){
@@ -65,6 +66,7 @@ int main(){
     }
     DescarregaTexturaFundo(&jogo, Fundo);
     DescarregaTexturaComida(&jogo);
+    DescarregaQuinaCobra(&jogo);
     CloseWindow();
     return 0;
 }
