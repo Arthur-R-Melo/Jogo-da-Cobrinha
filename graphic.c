@@ -12,6 +12,7 @@ void rotateImage(Vector2* vec, float* degree, int direction);
 void DesenhaBody(Jogo *j){
     NodePointer temp = j->body.tail;
     float x, y;
+    int pastDirection = j->body.head->direcao;
     Rectangle rec;
     while (temp)
     {
@@ -37,6 +38,7 @@ void DesenhaBody(Jogo *j){
             DrawRectangleRec(rec, SNAKE_COLOR);
         }
 
+        pastDirection = temp->direcao;
         temp = temp->prox;
     }
 }
@@ -83,6 +85,14 @@ Texture2D CarregaTextureFundo(Jogo *jogo){
 
 void DescarregaTexturaFundo(Jogo* jogo, Texture2D fundo){
     UnloadTexture(fundo);
+}
+
+void CarregaQuinaCobra(Jogo* jogo) {
+    jogo->quinaCobra = LoadTexture("assets/seta-virando.jpg");
+}
+
+void DescarregaQuinaCobra(Jogo* jogo) {
+    UnloadTexture(jogo->quinaCobra);
 }
 
 void CarregaTexturaComida(Jogo *jogo) {

@@ -33,6 +33,7 @@ typedef struct Jogo{
     Body body;
     Food food;
     FoodTextures foodTexture;
+    Texture2D quinaCobra;
     Bordas bordas[4];
     double tempo;
     double cooldown;
