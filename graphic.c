@@ -8,6 +8,7 @@
 //Funções para uso exclusivamente interno, por isso não estão no cabeçalho
 void coordToPosition(Coord coord, float* x, float*y);
 void rotateImage(Vector2* vec, float* degree, int direction);
+void rotateQuina(int pastDir, int newDir, Vector2* vec, float* degree, Rectangle* rec);
 
 void DesenhaBody(Jogo *j){
     NodePointer temp = j->body.tail;
@@ -23,18 +24,21 @@ void DesenhaBody(Jogo *j){
         rec.y = y;
         rec.width = STD_SIZE_X;
         rec.height = STD_SIZE_Y;
-
-        rotateImage(&position, &degree, temp->direcao);
+        Rectangle src = (Rectangle) {0,0,STD_SIZE_X,STD_SIZE_Y};        
 
         if (temp == j->body.head) {
             //DrawRectangleRec(rec, RED);
+            rotateImage(&position, &degree, temp->direcao);
             DrawTexturePro(j->foodTexture.texture,
                   (Rectangle){0, 0, j->foodTexture.texture.width, j->foodTexture.texture.height},
                   rec,
                   position,
                   degree,
                   WHITE);
-        } else {
+        } else if (pastDirection != temp->direcao && temp != j->body.tail){
+            rotateQuina(pastDirection, temp->direcao, &position, &degree, &src);
+            DrawTexturePro(j->quinaCobra, src, rec, position, degree, WHITE);
+        }else {
             DrawRectangleRec(rec, SNAKE_COLOR);
         }
 
@@ -104,6 +108,23 @@ void CarregaTexturaComida(Jogo *jogo) {
 
 void DescarregaTexturaComida(Jogo *jogo) {
         UnloadTexture(jogo->foodTexture.texture);
+}
+
+void rotateQuina(int pastDir, int newDir, Vector2* vec, float* degree, Rectangle* rec) {
+
+    if (newDir == DIR_LEFT) rec->width*=-1;
+    if (pastDir == DIR_DOWN) rec->height*=-1;
+    if (pastDir == DIR_LEFT) {
+        *degree = -90.0f;
+        vec->x+=STD_SIZE_X;
+        if (newDir == DIR_DOWN) rec->width*=-1;
+    }
+    if (pastDir == DIR_RIGHT){
+        *degree = 90;
+        vec->y+=STD_SIZE_Y;
+        if (newDir == DIR_UP) rec->width*=-1;
+    }
+    
 }
 
 void rotateImage(Vector2* vec, float* degree, int direction) {

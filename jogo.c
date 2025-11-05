@@ -102,7 +102,7 @@ void AtualizaPosBody(Jogo *j){
     if (ColisaoFood(j))
     {
         growSnake(&(j->body), coord);
-        //mudaCoordFood(j);
+        mudaCoordFood(j);
         j->pontuacao++;
         
         //Mudança de coord food
