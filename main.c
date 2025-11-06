@@ -29,6 +29,9 @@ int main(){
     srand(time(NULL)); 
 
     Texture2D Fundo;
+    CarregaRabo(&jogo);
+    CarregaCabeca(&jogo);
+    CarregaBody(&jogo);
     Fundo = CarregaTextureFundo(&jogo); 
     CarregaTexturaComida(&jogo);
     CarregaQuinaCobra(&jogo);
@@ -64,6 +67,9 @@ int main(){
         }
         EndDrawing();
     }
+    DescarregaRabo(&jogo);
+    DescarregaCabeca(&jogo);
+    DescarregaBody(&jogo);
     DescarregaTexturaFundo(&jogo, Fundo);
     DescarregaTexturaComida(&jogo);
     DescarregaQuinaCobra(&jogo);
