@@ -29,8 +29,8 @@ void DesenhaBody(Jogo *j){
         if (temp == j->body.head) {
             //DrawRectangleRec(rec, RED);
             rotateImage(&position, &degree, temp->direcao);
-            DrawTexturePro(j->foodTexture.texture,
-                  (Rectangle){0, 0, j->foodTexture.texture.width, j->foodTexture.texture.height},
+            DrawTexturePro(j->cabeca,
+                  (Rectangle){0, 0, j->cabeca.width, j->cabeca.height},
                   rec,
                   position,
                   degree,
@@ -38,8 +38,22 @@ void DesenhaBody(Jogo *j){
         } else if (pastDirection != temp->direcao && temp != j->body.tail){
             rotateQuina(pastDirection, temp->direcao, &position, &degree, &src);
             DrawTexturePro(j->quinaCobra, src, rec, position, degree, WHITE);
+        }else if (temp == j->body.tail){
+            rotateImage(&position, &degree, temp->direcao);
+            DrawTexturePro(j->rabo,
+                  (Rectangle){0, 0, j->rabo.width, j->rabo.height},
+                  rec,
+                  position,
+                  degree,
+                  WHITE);
         }else {
-            DrawRectangleRec(rec, SNAKE_COLOR);
+            rotateImage(&position, &degree, temp->direcao);
+            DrawTexturePro(j->corpo,
+                  (Rectangle){0, 0, j->corpo.width, j->corpo.height},
+                  rec,
+                  position,
+                  degree,
+                  WHITE);
         }
 
         pastDirection = temp->direcao;
@@ -83,7 +97,7 @@ void coordToPosition(Coord coord, float* x, float*y) {
 }
 
 Texture2D CarregaTextureFundo(Jogo *jogo){
-    Texture2D fundo = LoadTexture("assets/background.png");
+    Texture2D fundo = LoadTexture("assets/background2.png");
     return fundo;
 }
 
@@ -92,15 +106,39 @@ void DescarregaTexturaFundo(Jogo* jogo, Texture2D fundo){
 }
 
 void CarregaQuinaCobra(Jogo* jogo) {
-    jogo->quinaCobra = LoadTexture("assets/seta-virando.jpg");
+    jogo->quinaCobra = LoadTexture("assets/curve.png");
 }
 
 void DescarregaQuinaCobra(Jogo* jogo) {
     UnloadTexture(jogo->quinaCobra);
 }
 
+void CarregaCabeca(Jogo* jogo){
+    jogo->cabeca = LoadTexture("assets/head2.png");
+}
+
+void DescarregaCabeca(Jogo* jogo){
+    UnloadTexture(jogo->cabeca);
+}
+
+void CarregaBody(Jogo* jogo){
+    jogo->corpo = LoadTexture("assets/body.png");
+}
+
+void DescarregaBody(Jogo* jogo){
+    UnloadTexture(jogo->corpo);
+}
+
+void CarregaRabo(Jogo* jogo){
+    jogo->rabo = LoadTexture("assets/tail.png");
+}
+
+void DescarregaRabo(Jogo* jogo){
+    UnloadTexture(jogo->rabo);
+}
+
 void CarregaTexturaComida(Jogo *jogo) {
-    jogo->foodTexture.texture = LoadTexture("assets/teste.png");
+    jogo->foodTexture.texture = LoadTexture("assets/apple.png");
     if (jogo->foodTexture.texture.id == 0) {
         printf("ERRO: Não foi possível carregar textura da comida!\n");
     }
@@ -152,4 +190,4 @@ void rotateImage(Vector2* vec, float* degree, int direction) {
 
         return;
     }
-}a
+}
