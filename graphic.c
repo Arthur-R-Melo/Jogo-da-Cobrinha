@@ -152,4 +152,4 @@ void rotateImage(Vector2* vec, float* degree, int direction) {
 
         return;
     }
-}
+}a
