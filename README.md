@@ -4,9 +4,9 @@ Projeto da disciplina de Laboratório de Programação II do curso de Ciências 
 
 ## Desenvolvido por
 
-- Arthur Ribeir Melo
-- João Vitor Sant'anna Santos
-- Luís Filipe Rabelo Leão de Oliveira
+- [Arthur Ribeir Melo](https://github.com/Arthur-R-Melo)
+- [João Vitor Sant'anna Santos](https://github.com/Osant-anna)
+- [Luís Filipe Rabelo Leão de Oliveira](https://github.com/Luisfileao)
 
 ## Requisitos
 
