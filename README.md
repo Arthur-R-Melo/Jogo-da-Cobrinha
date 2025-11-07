@@ -2,13 +2,19 @@
 
 Projeto da disciplina de Laboratório de Programação II do curso de Ciências da Computação UFSJ.
 
+## Desenvolvido por
+
+- Arthur Ribeir Melo
+- João Vitor Sant'anna Santos
+- Luís Filipe Rabelo Leão de Oliveira
+
 ## Requisitos
 
 - [Raylib](https://github.com/raysan5/raylib)
 
 ## Como executar
 
-Se usa o GCC, apenas de o  comando `make` no diretório do programa e execute o arquivo `snake.exe`.
+Se usa o GCC, apenas use o comando `make` no diretório do programa e execute o arquivo `snake.exe` ou use o comando `make teste`.
 
 Caso use outro compilador, compile manualmente.
 
