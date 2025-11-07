@@ -15,5 +15,11 @@ Texture2D CarregaTextureFundo(Jogo *jogo);
 void DescarregaTexturaFundo(Jogo* jogo, Texture2D fundo);
 void CarregaQuinaCobra(Jogo* jogo);
 void DescarregaQuinaCobra(Jogo* jogo);
+void CarregaCabeca(Jogo* jogo);
+void DescarregaCabeca(Jogo* jogo);
+void CarregaBody(Jogo* jogo);
+void DescarregaBody(Jogo* jogo);
+void CarregaRabo(Jogo* jogo);
+void DescarregaRabo(Jogo* jogo);
 
 #endif
