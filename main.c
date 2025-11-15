@@ -21,7 +21,7 @@
 #define FOOD_COLOR BLUE
 
 typedef enum {
-    TELA_DIFICULDADE,
+    TELA_MENU,
     TELA_JOGO
 } Tela;
 
@@ -94,16 +94,15 @@ int main(){
 
     IniciaJogo(&jogo);
 
-    Tela telaAtual = TELA_DIFICULDADE;
+    Tela telaAtual = TELA_MENU;
 
     while (!WindowShouldClose()){
         BeginDrawing();      
-        ClearBackground(BLACK);        
-
-        DrawText("PRESS ENTER TO START", 70, 500, 40, RED);
+        ClearBackground(BLACK);
         
-        if(telaAtual == TELA_DIFICULDADE){
+        if(telaAtual == TELA_MENU){
             desenhaDificuldade(&jogo);
+            DrawText("PRESS ENTER TO START", 70, 500, 40, RED);
 
             if(IsKeyPressed(KEY_ENTER)){
                 telaAtual = TELA_JOGO;
