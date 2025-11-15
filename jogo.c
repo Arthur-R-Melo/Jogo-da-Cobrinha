@@ -14,6 +14,10 @@ void IniciaPontuacao(Jogo *j){
     j->pontuacao = 0;
 }
 
+void IniciaDificuldade(Jogo *j){
+    j->dificuldade = 0;
+}
+
 void IniciaBody(Jogo *j){
     j->body = newBody((Coord) {7, 15}, 0);
 }
@@ -40,14 +44,14 @@ void IniciaFood(Jogo *j){
 }
 
 void IniciaJogo(Jogo *j){
+    IniciaDificuldade(j);
     IniciaBordas(j);
     IniciaBody(j);
     IniciaFood(j);
-    IniciaPontuacao(j);
+    IniciaPontuacao(j);    
     j->tempo = GetTime();
     j->gameOver = 1;
 }
-
 
 void AtualizaDirecao(Jogo *j){
     //Atualiza para qual direção a cobra vai  
