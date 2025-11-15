@@ -21,5 +21,6 @@ void CarregaBody(Jogo* jogo);
 void DescarregaBody(Jogo* jogo);
 void CarregaRabo(Jogo* jogo);
 void DescarregaRabo(Jogo* jogo);
+void desenhaDificuldade(Jogo* j);
 
 #endif

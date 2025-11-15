@@ -10,6 +10,57 @@ void coordToPosition(Coord coord, float* x, float*y);
 void rotateImage(Vector2* vec, float* degree, int direction);
 void rotateQuina(int pastDir, int newDir, Vector2* vec, float* degree, Rectangle* rec);
 
+void desenhaDificuldade(Jogo* j){ 
+    Vector2 p1 = {230, 350};
+    Vector2 p2 = {250, 380};
+    Vector2 p3 = {250, 320};
+
+    Vector2 p4 = {430, 350};
+    Vector2 p5 = {410, 320};
+    Vector2 p6 = {410, 380};    
+
+    DrawRectangle(260, 320, 140, 60, WHITE);
+
+    bool hoverT1  = CheckCollisionPointTriangle(GetMousePosition(), p1, p2, p3);
+    bool hoverT2  = CheckCollisionPointTriangle(GetMousePosition(), p4, p5, p6);
+
+    if(hoverT1 && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)){
+        if(j->dificuldade > 0) j->dificuldade--;
+        else j->dificuldade = 2;
+    }
+
+    if(hoverT2 && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)){
+        if(j->dificuldade < 2) j->dificuldade++;
+        else j->dificuldade = 0;
+    }    
+
+    switch (j->dificuldade){
+        case 0:
+            DrawText("Fácil", 290, 335, 35, GREEN);
+            break;
+
+        case 1:
+            DrawText("Médio", 285, 335, 35, ORANGE);
+            break;
+
+        case 2:
+            DrawText("Difícil", 285, 335, 35, RED);
+            break;
+            
+        default:
+            break;
+    }
+    
+    Color corT1 = WHITE;
+    Color corT2 = WHITE;
+
+    if(hoverT1) corT1 = RED;
+    if(hoverT2) corT2 = RED;
+
+    DrawTriangle(p1, p2, p3, corT1);
+    DrawTriangle(p4, p5, p6, corT2);
+}
+
 void DesenhaBody(Jogo *j){
     NodePointer temp = j->body.tail;
     float x, y;
