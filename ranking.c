@@ -62,4 +62,5 @@ Ranking addInRanking(int dificuldade, Player p, int index, Ranking r) {
     FILE *f = fopen(path, "wb");
     fwrite(&r, sizeof(Ranking), 1, f);
     fclose(f);
+    return r;
 }
