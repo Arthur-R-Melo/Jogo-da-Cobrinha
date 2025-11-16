@@ -3,6 +3,9 @@
 
 #define NAME_SIZE 3
 #define RANKING_SIZE 20
+#define HARD_RANKING 1
+#define MEDIUM_RANKING 2
+#define EASY_RANKING 3
 
 typedef struct Player{
     char nome[NAME_SIZE];
@@ -14,7 +17,7 @@ typedef struct Ranking{
     int lenght;
 }Ranking;
 
-Ranking* getRanking(int dificuldade);
-Ranking* addInRanking(int dificuldade, Player jogador);
+Ranking getRanking(int dificuldade);
+Ranking addInRanking(int dificuldade, Player jogador);
 
 #endif
