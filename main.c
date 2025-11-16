@@ -83,6 +83,7 @@ int main(){
                 if (IsKeyPressed(KEY_ENTER)){
                     IniciaJogo(&jogo);
                     jogo.gameOver = 1;
+                    telaAtual = TELA_MENU;
                 }
             }
         }

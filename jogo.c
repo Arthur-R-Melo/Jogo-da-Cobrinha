@@ -79,23 +79,36 @@ void AtualizaPosBody(Jogo *j){
 
     if (j->body.head->direcao == 0){
         coord.y--;
-        coord.y+=TAB_SIZE;
-        coord.y%=TAB_SIZE;
+        if(j->dificuldade == 0){
+            coord.y+=TAB_SIZE;
+            coord.y%=TAB_SIZE;
+        }
     }
     if (j->body.head->direcao == 1){
         coord.x++;
-        coord.x+=TAB_SIZE;
-        coord.x%=16;
+        if(j->dificuldade == 0){
+            coord.x+=TAB_SIZE;
+            coord.x%=16;
+        }
     }
     if (j->body.head->direcao == 2){
         coord.y++;
-        coord.y+=TAB_SIZE;
-        coord.y%=16;
+        if(j->dificuldade == 0){
+            coord.y+=TAB_SIZE;
+            coord.y%=16;
+        }
     }
     if (j->body.head->direcao == 3){
         coord.x--;
-        coord.x+=TAB_SIZE;
-        coord.x%=16;
+        if(j->dificuldade == 0){
+            coord.x+=TAB_SIZE;
+            coord.x%=16;
+        }
+    }
+
+    if(coord.x < 0 || coord.x > TAB_SIZE || coord.y < 0 || coord.y > TAB_SIZE){
+        j->gameOver = 0;
+        return;
     }
 
     if (isSnakeInCoord(&(j->body), coord) && !(!ColisaoFood(j) && compareCoord(coord, j->body.tail->coord))){
