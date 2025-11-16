@@ -106,7 +106,7 @@ void AtualizaPosBody(Jogo *j){
         }
     }
 
-    if(coord.x < 0 || coord.x > TAB_SIZE || coord.y < 0 || coord.y > TAB_SIZE){
+    if(coord.x < 0 || coord.x > 15 || coord.y < 0 || coord.y > 15){
         j->gameOver = 0;
         return;
     }
