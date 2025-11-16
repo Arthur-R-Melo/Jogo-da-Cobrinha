@@ -18,6 +18,7 @@ typedef struct Ranking{
 }Ranking;
 
 Ranking getRanking(int dificuldade);
-Ranking addInRanking(int dificuldade, Player jogador);
+Ranking addInRanking(int dificuldade, Player jogador, int index, Ranking ranking);
+int isInRanking(int dificuldade, Player jogador); //Retorna o indice + 1 da posicao a ser inserido
 
 #endif
