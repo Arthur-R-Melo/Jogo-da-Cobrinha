@@ -36,8 +36,8 @@ int isInRanking(int dificuldade, int pont) {
     return 0;
 }
 
-Ranking addInRanking(int dificuldade, Player p, int index, Ranking r) {
-
+Ranking addInRanking(int dificuldade, Player p, int index) {
+    Ranking r = getRanking(dificuldade);
     /*
     * Caso lenght = 0, index = 0 e na primeira execução i = -1
     * portanto o for não deverá rodar para valores válidos
