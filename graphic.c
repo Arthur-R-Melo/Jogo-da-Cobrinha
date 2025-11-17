@@ -61,6 +61,26 @@ void desenhaDificuldade(Jogo* j){
     DrawTriangle(p4, p5, p6, corT2);
 }
 
+void DesenhaBarreiras(Jogo *j){   
+
+    for(int i = 0; i < j->quantBarreiras; i++){
+        float x, y;        
+        coordToPosition(j->posicoesBarreira[i], &x, &y);    
+        Rectangle rec;
+        rec.width = STD_SIZE_X;
+        rec.height = STD_SIZE_Y;
+        rec.x = x;
+        rec.y = y;
+
+        DrawTexturePro(j->barreira,
+                    (Rectangle){0, 0, j->barreira.width, j->barreira.height},
+                    rec,
+                    (Vector2){0, 0},
+                    0.0f,
+                    WHITE);
+    }    
+}
+
 void DesenhaBody(Jogo *j){
     NodePointer temp = j->body.tail;
     float x, y;
@@ -140,11 +160,23 @@ void DesenhaJogo(Jogo *j){
     DesenhaBordas(j);
     DesenhaFood(j);
     DesenhaBody(j);
+
+    if(j->dificuldade == 2){
+        DesenhaBarreiras(j);
+    }
 }
 
 void coordToPosition(Coord coord, float* x, float*y) {
     *x = (float)(coord.x * 40 + 10);
     *y = (float)(coord.y * 40 + 50);
+}
+
+void CarregaTextureBarreira(Jogo *jogo){
+    jogo->barreira = LoadTexture("assets/trapSnake.png");
+}
+
+void DescarregaTextureBarreira(Jogo *jogo){
+    UnloadTexture(jogo->barreira);
 }
 
 Texture2D CarregaTextureFundo(Jogo *jogo){

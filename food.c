@@ -28,9 +28,9 @@ void mudaCoordFood(Jogo *j){
     Coord coordFoodAtual = j->food.coord;  
     NodePointer temp = j->body.tail;
 
-    int posicoes[16][16];
+    int posicoes[16][16];    
 
-    iniciaMatrizPosicoes(posicoes);
+    iniciaMatrizPosicoes(posicoes);    
     
     //Adiciono todas as coordenadas indevidas em uma Lista Encadeada --
     while(temp->prox != NULL){
@@ -44,8 +44,16 @@ void mudaCoordFood(Jogo *j){
     Food* tempFood = &j->food;  
     
     //Gero e testo as novas coordenadas para Food
-    while(verificaPossivelCoord(posicoes, tempFood->coord.x, tempFood->coord.y)){
-        tempFood->coord.x = geraXY();
-        tempFood->coord.y = geraXY();
-    }   
+    if(j->dificuldade == 2){
+        while(verificaPossivelCoord(posicoes, tempFood->coord.x, tempFood->coord.y) || 
+        verificaPossivelCoord(j->posicoesBarreiraMatriz, tempFood->coord.x, tempFood->coord.y)){
+            tempFood->coord.x = geraXY();
+            tempFood->coord.y = geraXY();
+        }   
+    }else{
+        while(verificaPossivelCoord(posicoes, tempFood->coord.x, tempFood->coord.y)){
+            tempFood->coord.x = geraXY();
+            tempFood->coord.y = geraXY();
+        }
+    }
 }

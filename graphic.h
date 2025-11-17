@@ -22,5 +22,8 @@ void DescarregaBody(Jogo* jogo);
 void CarregaRabo(Jogo* jogo);
 void DescarregaRabo(Jogo* jogo);
 void desenhaDificuldade(Jogo* j);
+void DesenhaBarreiras(Jogo *j);
+void CarregaTextureBarreira(Jogo *jogo);
+void DescarregaTextureBarreira(Jogo *jogo);
 
 #endif

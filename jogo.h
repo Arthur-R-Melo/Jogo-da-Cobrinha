@@ -39,12 +39,16 @@ typedef struct Jogo{
     Texture2D cabeca;
     Texture2D corpo;
     Texture2D rabo;
+    Texture2D barreira;
     Bordas bordas[4];
     double tempo;
     double cooldown;
     int gameOver;
     int pontuacao;
     int dificuldade;
+    Coord posicoesBarreira[18];
+    int posicoesBarreiraMatriz[16][16];
+    int quantBarreiras;
 }Jogo;
 
 void IniciaBordas(Jogo *j);
@@ -54,5 +58,6 @@ void AtualizaDirecao(Jogo *j);
 void AtualizaPosBody(Jogo *j);
 void AtualizaRodada(Jogo *j);
 int ColisaoFood(Jogo *j);
+int ColisaoBarreira(Jogo* j, Coord coord);
 
 #endif

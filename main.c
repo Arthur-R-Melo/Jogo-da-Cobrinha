@@ -40,6 +40,7 @@ int main(){
     Fundo = CarregaTextureFundo(&jogo); 
     CarregaTexturaComida(&jogo);
     CarregaQuinaCobra(&jogo);
+    CarregaTextureBarreira(&jogo);
 
     IniciaJogo(&jogo);
 
@@ -95,6 +96,7 @@ int main(){
     DescarregaTexturaFundo(&jogo, Fundo);
     DescarregaTexturaComida(&jogo);
     DescarregaQuinaCobra(&jogo);
+    DescarregaTextureBarreira(&jogo);
     CloseWindow();
     return 0;
 }

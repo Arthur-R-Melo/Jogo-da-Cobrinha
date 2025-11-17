@@ -14,12 +14,51 @@ void IniciaPontuacao(Jogo *j){
     j->pontuacao = 0;
 }
 
+void IniciaQuantBarreiras(Jogo *j){
+    j->quantBarreiras = 18;
+}
+
+void IniciaMatrizBarreiras(Jogo *j){
+    for(int i = 0; i < 16; i++){
+        for(int k = 0; k < 16; k++){
+            j->posicoesBarreiraMatriz[i][k] = 0;
+        }
+    }
+
+    for(int i = 0; i < j->quantBarreiras; i++){
+        j->posicoesBarreiraMatriz[j->posicoesBarreira[i].x][j->posicoesBarreira[i].y] = 1;
+    }
+}
+
 void IniciaDificuldade(Jogo *j){
     j->dificuldade = 0;
 }
 
 void IniciaBody(Jogo *j){
     j->body = newBody((Coord) {7, 15}, 0);
+}
+
+void IniciaPosicoesBarreira(Jogo *j){
+    j->posicoesBarreira[0] = (Coord){5, 5};
+    j->posicoesBarreira[1] = (Coord){6, 5};
+    j->posicoesBarreira[2] = (Coord){5, 6};
+
+    j->posicoesBarreira[3] = (Coord){12, 9};
+    j->posicoesBarreira[4] = (Coord){13, 9};
+    j->posicoesBarreira[5] = (Coord){13, 10};
+    j->posicoesBarreira[6] = (Coord){13, 11};
+    j->posicoesBarreira[7] = (Coord){10, 1};
+
+    j->posicoesBarreira[8] = (Coord){5, 9};
+    j->posicoesBarreira[9] = (Coord){2, 4};
+    j->posicoesBarreira[10] = (Coord){6, 12};
+    j->posicoesBarreira[11] = (Coord){15, 12};
+    j->posicoesBarreira[12] = (Coord){11, 10};
+    j->posicoesBarreira[13] = (Coord){12, 14};
+    j->posicoesBarreira[14] = (Coord){13, 1};
+    j->posicoesBarreira[15] = (Coord){8, 3};
+    j->posicoesBarreira[16] = (Coord){5, 5};
+    j->posicoesBarreira[17] = (Coord){3, 3};
 }
 
 void IniciaBordas(Jogo *j){
@@ -45,6 +84,9 @@ void IniciaFood(Jogo *j){
 
 void IniciaJogo(Jogo *j){
     IniciaDificuldade(j);
+    IniciaPosicoesBarreira(j);
+    IniciaQuantBarreiras(j);
+    IniciaMatrizBarreiras(j);
     IniciaBordas(j);
     IniciaBody(j);
     IniciaFood(j);
@@ -111,6 +153,11 @@ void AtualizaPosBody(Jogo *j){
         return;
     }
 
+    if(j->dificuldade == 2 && ColisaoBarreira(j, coord)){
+        j->gameOver = 0;
+        return;
+    }
+
     if (isSnakeInCoord(&(j->body), coord) && !(!ColisaoFood(j) && compareCoord(coord, j->body.tail->coord))){
         j->gameOver = 0;
         return;
@@ -141,4 +188,8 @@ void AtualizaRodada(Jogo *j){
 
 int ColisaoFood(Jogo *j){
     return compareCoord(j->body.head->coord, j->food.coord);
+}
+
+int ColisaoBarreira(Jogo* j, Coord coord){
+    return (j->posicoesBarreiraMatriz[coord.x][coord.y] == 1);
 }
