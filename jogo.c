@@ -93,6 +93,7 @@ void IniciaJogo(Jogo *j){
     IniciaPontuacao(j);    
     j->tempo = GetTime();
     j->gameOver = 1;
+    j->resize = 1.0f;
 }
 
 void AtualizaDirecao(Jogo *j){

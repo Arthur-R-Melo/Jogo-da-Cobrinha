@@ -49,6 +49,7 @@ typedef struct Jogo{
     Coord posicoesBarreira[18];
     int posicoesBarreiraMatriz[16][16];
     int quantBarreiras;
+    float resize;
 }Jogo;
 
 void IniciaBordas(Jogo *j);
