@@ -12,7 +12,6 @@
 
 #define LARGURA 660
 #define ALTURA_JOGO 660
-#define BARRA_ALTURA 40
 #define ALTURA_TOTAL (ALTURA_JOGO + BARRA_ALTURA)
 #define STD_SIZE_X 40
 #define STD_SIZE_Y 40
@@ -47,6 +46,7 @@ int main(){
     Tela telaAtual = TELA_MENU;
 
     while (!WindowShouldClose()){
+        SetWindowSize(LARGURA*jogo.resize, ALTURA_JOGO*jogo.resize + BARRA_ALTURA);
         BeginDrawing();      
         ClearBackground(BLACK);
         
@@ -60,10 +60,10 @@ int main(){
         }
 
         else if(telaAtual == TELA_JOGO){
-        
-            DrawTexture(Fundo, 0, BARRA_ALTURA, WHITE);
-
-            DrawRectangle(0, 0, LARGURA, BARRA_ALTURA, WHITE);
+            DrawTexturePro(Fundo, (Rectangle) {0, 0, LARGURA, ALTURA_JOGO},
+             (Rectangle) {0, BARRA_ALTURA, LARGURA*jogo.resize, ALTURA_JOGO*jogo.resize}, (Vector2) {0,0}, 0.0f,WHITE);
+            AtualizaBordas(&jogo);
+            DrawRectangle(0, 0, LARGURA*jogo.resize, BARRA_ALTURA, WHITE);
             char pontuacao[50];            
             sprintf(pontuacao, "Pontuação: %d", jogo.pontuacao);
             DrawText(pontuacao, 10, 10, 20, BLACK);

@@ -6,9 +6,9 @@
 #include <stdio.h>
 
 //Funções para uso exclusivamente interno, por isso não estão no cabeçalho
-void coordToPosition(Coord coord, float* x, float*y);
-void rotateImage(Vector2* vec, float* degree, int direction);
-void rotateQuina(int pastDir, int newDir, Vector2* vec, float* degree, Rectangle* rec);
+void coordToPosition(Coord coord, float* x, float*y, float resizeFactor);
+void rotateImage(Vector2* vec, float* degree, int direction, float resize);
+void rotateQuina(int pastDir, int newDir, Vector2* vec, float* degree, Rectangle* rec, float resize);
 
 void desenhaDificuldade(Jogo* j){ 
     Vector2 p1 = {230, 350};
@@ -65,10 +65,10 @@ void DesenhaBarreiras(Jogo *j){
 
     for(int i = 0; i < j->quantBarreiras; i++){
         float x, y;        
-        coordToPosition(j->posicoesBarreira[i], &x, &y);    
+        coordToPosition(j->posicoesBarreira[i], &x, &y, j->resize);    
         Rectangle rec;
-        rec.width = STD_SIZE_X;
-        rec.height = STD_SIZE_Y;
+        rec.width = STD_SIZE_X*j->resize;
+        rec.height = STD_SIZE_Y*j->resize;
         rec.x = x;
         rec.y = y;
 
@@ -88,18 +88,18 @@ void DesenhaBody(Jogo *j){
     Rectangle rec;
     while (temp)
     {
-        coordToPosition(temp->coord, &x, &y);
+        coordToPosition(temp->coord, &x, &y, j->resize);
         float degree = 0.0f;
         Vector2 position = (Vector2){0,0};
         rec.x = x;
         rec.y = y;
-        rec.width = STD_SIZE_X;
-        rec.height = STD_SIZE_Y;
+        rec.width = STD_SIZE_X * j->resize;
+        rec.height = STD_SIZE_Y * j->resize;
         Rectangle src = (Rectangle) {0,0,STD_SIZE_X,STD_SIZE_Y};        
 
         if (temp == j->body.head) {
             //DrawRectangleRec(rec, RED);
-            rotateImage(&position, &degree, temp->direcao);
+            rotateImage(&position, &degree, temp->direcao, j->resize);
             DrawTexturePro(j->cabeca,
                   (Rectangle){0, 0, j->cabeca.width, j->cabeca.height},
                   rec,
@@ -107,10 +107,10 @@ void DesenhaBody(Jogo *j){
                   degree,
                   WHITE);
         } else if (pastDirection != temp->direcao && temp != j->body.tail){
-            rotateQuina(pastDirection, temp->direcao, &position, &degree, &src);
+            rotateQuina(pastDirection, temp->direcao, &position, &degree, &src, j->resize);
             DrawTexturePro(j->quinaCobra, src, rec, position, degree, WHITE);
         }else if (temp == j->body.tail){
-            rotateImage(&position, &degree, temp->direcao);
+            rotateImage(&position, &degree, temp->direcao, j->resize);
             DrawTexturePro(j->rabo,
                   (Rectangle){0, 0, j->rabo.width, j->rabo.height},
                   rec,
@@ -118,7 +118,7 @@ void DesenhaBody(Jogo *j){
                   degree,
                   WHITE);
         }else {
-            rotateImage(&position, &degree, temp->direcao);
+            rotateImage(&position, &degree, temp->direcao, j->resize);
             DrawTexturePro(j->corpo,
                   (Rectangle){0, 0, j->corpo.width, j->corpo.height},
                   rec,
@@ -134,10 +134,10 @@ void DesenhaBody(Jogo *j){
 
 void DesenhaFood(Jogo *j){
     float x, y;
-    coordToPosition(j->food.coord, &x, &y);
+    coordToPosition(j->food.coord, &x, &y, j->resize);
     Rectangle rec;
-    rec.width = STD_SIZE_X;
-    rec.height = STD_SIZE_Y;
+    rec.width = STD_SIZE_X * j->resize;
+    rec.height = STD_SIZE_Y * j->resize;
     rec.x = x;
     rec.y = y;
 
@@ -166,9 +166,9 @@ void DesenhaJogo(Jogo *j){
     }
 }
 
-void coordToPosition(Coord coord, float* x, float*y) {
-    *x = (float)(coord.x * 40 + 10);
-    *y = (float)(coord.y * 40 + 50);
+void coordToPosition(Coord coord, float* x, float*y, float resizeFactor) {
+    *x = (float)(coord.x * 40 * resizeFactor + 10);
+    *y = (float)(coord.y * 40 * resizeFactor + 50);
 }
 
 void CarregaTextureBarreira(Jogo *jogo){
@@ -231,45 +231,45 @@ void DescarregaTexturaComida(Jogo *jogo) {
         UnloadTexture(jogo->foodTexture.texture);
 }
 
-void rotateQuina(int pastDir, int newDir, Vector2* vec, float* degree, Rectangle* rec) {
+void rotateQuina(int pastDir, int newDir, Vector2* vec, float* degree, Rectangle* rec, float resize) {
 
     if (newDir == DIR_LEFT) rec->width*=-1;
     if (pastDir == DIR_DOWN) rec->height*=-1;
     if (pastDir == DIR_LEFT) {
         *degree = -90.0f;
-        vec->x+=STD_SIZE_X;
+        vec->x+=STD_SIZE_X*resize;
         if (newDir == DIR_DOWN) rec->width*=-1;
     }
     if (pastDir == DIR_RIGHT){
         *degree = 90;
-        vec->y+=STD_SIZE_Y;
+        vec->y+=STD_SIZE_Y*resize;
         if (newDir == DIR_UP) rec->width*=-1;
     }
     
 }
 
-void rotateImage(Vector2* vec, float* degree, int direction) {
+void rotateImage(Vector2* vec, float* degree, int direction, float resize) {
 
     if (direction == DIR_UP) return;
     
     if (direction == DIR_DOWN) {
         *degree = 180.0f;
-        vec->x+=STD_SIZE_X;
-        vec->y+=STD_SIZE_Y;
+        vec->x+=STD_SIZE_X*resize;
+        vec->y+=STD_SIZE_Y*resize;
 
         return;
     }
 
     if (direction == DIR_LEFT) {
         *degree = -90.0f;
-        vec->x+=STD_SIZE_X;
+        vec->x+=STD_SIZE_X*resize;
 
         return;
     }
     
     if (direction == DIR_RIGHT) {
         *degree = 90.0f;
-        vec->y+=STD_SIZE_Y;
+        vec->y+=STD_SIZE_Y*resize;
 
         return;
     }

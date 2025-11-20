@@ -60,5 +60,6 @@ void AtualizaPosBody(Jogo *j);
 void AtualizaRodada(Jogo *j);
 int ColisaoFood(Jogo *j);
 int ColisaoBarreira(Jogo* j, Coord coord);
+void AtualizaBordas(Jogo *j);
 
 #endif

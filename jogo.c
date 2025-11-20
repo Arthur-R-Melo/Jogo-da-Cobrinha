@@ -72,6 +72,17 @@ void IniciaBordas(Jogo *j){
     j->bordas[3].pos = (Rectangle) {0, BARRA_ALTURA, 10, ALTURA_JOGO};
 }
 
+void AtualizaBordas(Jogo *j) {
+    //Borda de cima
+    j->bordas[0].pos = (Rectangle) {0, BARRA_ALTURA, LARGURA*j->resize, 10};
+    //Borda da direita
+    j->bordas[1].pos = (Rectangle) {(LARGURA-10)*j->resize, BARRA_ALTURA, 10*j->resize, ALTURA_JOGO*j->resize};
+    //Borda de baixo
+    j->bordas[2].pos = (Rectangle) {0, (ALTURA_JOGO-10)*j->resize + BARRA_ALTURA, LARGURA*j->resize, 10*j->resize};
+    //Borda da esquerda
+    j->bordas[3].pos = (Rectangle) {0, BARRA_ALTURA, 10*j->resize, ALTURA_JOGO*j->resize};
+}
+
 void IniciaFood(Jogo *j){
     Coord tempCoord = (Coord) {rand()%16, rand()%16};
     while(tempCoord.x == 7 && tempCoord.y == 15){
@@ -93,7 +104,7 @@ void IniciaJogo(Jogo *j){
     IniciaPontuacao(j);    
     j->tempo = GetTime();
     j->gameOver = 1;
-    j->resize = 1.0f;
+    j->resize = 1.25f;
 }
 
 void AtualizaDirecao(Jogo *j){
