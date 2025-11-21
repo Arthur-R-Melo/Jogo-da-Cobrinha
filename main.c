@@ -52,7 +52,7 @@ int main(){
         
         if(telaAtual == TELA_MENU){
             desenhaDificuldade(&jogo);
-            DrawText("PRESS ENTER TO START", 70, 500, 40, RED);
+            DrawText("PRESS ENTER TO START", LARGURA*jogo.resize/2 - 260, (ALTURA_JOGO*jogo.resize+BARRA_ALTURA)/2 + 150, 40, RED);
 
             if(IsKeyPressed(KEY_ENTER)){
                 telaAtual = TELA_JOGO;
@@ -78,9 +78,9 @@ int main(){
                 char texto[50];            
                 sprintf(texto, "Sua pontuacao foi: %d!", jogo.pontuacao);
                 
-                DrawText("GAME OVER!", 200, 200, 40, RED);
-                DrawText(texto, 180, 260, 30, WHITE);
-                DrawText("Continue", 265, 400, 30, WHITE);
+                DrawText("GAME OVER!", LARGURA*jogo.resize/2 - 130,  (ALTURA_JOGO*jogo.resize+BARRA_ALTURA)/2 - 150, 40, RED);
+                DrawText(texto, LARGURA*jogo.resize/2 - 150,  (ALTURA_JOGO*jogo.resize+BARRA_ALTURA)/2 - 90, 30, WHITE);
+                DrawText("Continue", LARGURA*jogo.resize/2 - 65,  (ALTURA_JOGO*jogo.resize+BARRA_ALTURA)/2 + 50, 30, WHITE);
                 if (IsKeyPressed(KEY_ENTER)){
                     IniciaJogo(&jogo);
                     jogo.gameOver = 1;
