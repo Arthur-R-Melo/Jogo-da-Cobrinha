@@ -9,6 +9,7 @@
 #include "jogo.h"
 #include "graphic.h"
 #include "food.h"
+#include "ranking.h"
 
 #define LARGURA 660
 #define ALTURA_JOGO 660
@@ -31,6 +32,11 @@ int main(){
     InitWindow(LARGURA, ALTURA_TOTAL, "Snake Game");
     SetTargetFPS(60);
     srand(time(NULL)); 
+    int flagRanking = 0;//Verdadeiro se o rank já foi adicionado
+    char name[NAME_SIZE];
+    name[0] = '\0';
+    int indexRanking = 0;
+    int len = 0;
 
     Texture2D Fundo;
     CarregaRabo(&jogo);
@@ -82,8 +88,25 @@ int main(){
                 DrawText("GAME OVER!", LARGURA*jogo.resize/2 - 130,  (ALTURA_JOGO*jogo.resize+BARRA_ALTURA)/2 - 150, 40, RED);
                 DrawText(texto, LARGURA*jogo.resize/2 - 150,  (ALTURA_JOGO*jogo.resize+BARRA_ALTURA)/2 - 90, 30, WHITE);
                 DrawText("Continue", LARGURA*jogo.resize/2 - 65,  (ALTURA_JOGO*jogo.resize+BARRA_ALTURA)/2 + 50, 30, WHITE);
+                if(!flagRanking) {
+                    if (!indexRanking) indexRanking = isInRanking(jogo.dificuldade, jogo.pontuacao);
+                    if (!indexRanking) flagRanking = 1;
+                    else {
+                        flagRanking = leituraNome(name, &len, &jogo);
+                        if (flagRanking) {
+                            Player player;
+                            strcpy(player.nome, name);
+                            player.pont = jogo.pontuacao;
+                            addInRanking(jogo.dificuldade, player, flagRanking - 1);
+                        }
+                    }
+                }
                 if (IsKeyPressed(KEY_ENTER)){
                     IniciaJogo(&jogo);
+                    indexRanking = 0;
+                    flagRanking = 0;
+                    name[0] = '\0';
+                    len = 0;
                     jogo.gameOver = 1;
                     telaAtual = TELA_MENU;
                 }

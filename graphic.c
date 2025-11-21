@@ -2,6 +2,7 @@
 #include "jogo.h"
 #include "snake.h"
 #include "coord.h"
+#include "ranking.h"
 
 #include <stdio.h>
 #include <stdbool.h>
@@ -11,6 +12,30 @@ void coordToPosition(Coord coord, float* x, float*y, float resizeFactor);
 void rotateImage(Vector2* vec, float* degree, int direction, float resize);
 void rotateQuina(int pastDir, int newDir, Vector2* vec, float* degree, Rectangle* rec, float resize);
 
+
+int leituraNome(char *nome,int *len, Jogo *j) {
+    int y = (ALTURA_JOGO*j->resize+BARRA_ALTURA)/2 - 50;
+    int x;
+    if (nome[0] == '\0') {
+        x = (LARGURA*j->resize - MeasureText(DEFAULT_NAME_TXT, 25))/2;
+        DrawText(DEFAULT_NAME_TXT, x, y, 25, GRAY);
+    } else {
+        x = (LARGURA*j->resize - MeasureText(nome, 25))/2;
+        DrawText(nome, x, y, 25, BLACK);
+    }
+    int key = GetCharPressed();
+    if (((key >= 'a' && key <='z') || (key >= 'A' && key <= 'Z')) && *len<NAME_SIZE-1) {
+        nome[*len] = key;
+        nome[++*len] = '\0';
+    }
+    if (IsKeyPressed(KEY_BACKSPACE) && *len>0) {
+        nome[--*len] = '\0';
+    }
+    if (IsKeyPressed(KEY_ENTER) && *len>0) {
+        return 1;
+    }
+    return 0;
+}
 void desenhaTamanhoTela(Jogo* j) {    
     Vector2 p1 = {LARGURA*j->resize/2 - 100, (ALTURA_JOGO*j->resize+BARRA_ALTURA)/2 - 70};
     Vector2 p2 = {LARGURA*j->resize/2 - 80, (ALTURA_JOGO*j->resize+BARRA_ALTURA)/2 - 40};

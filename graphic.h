@@ -8,6 +8,7 @@
 #define ALT_SIZE_STR "825x865"
 #define WIN_SIZE_TXT_COLOR DARKGRAY
 #define WIN_SIZE_TXT_FONT_SIZE 30
+#define DEFAULT_NAME_TXT "Insira seu nome"
 
 void DesenhaBody(Jogo *j);
 void DesenhaFood(Jogo *j);
@@ -29,6 +30,7 @@ void desenhaDificuldade(Jogo* j);
 void DesenhaBarreiras(Jogo *j);
 void CarregaTextureBarreira(Jogo *jogo);
 void DescarregaTextureBarreira(Jogo *jogo);
-void desenhaTamanhoTela(Jogo *Jogo);
+void desenhaTamanhoTela(Jogo *jogo);
+int leituraNome(char *nome,int *len, Jogo *jogo);
 
 #endif
