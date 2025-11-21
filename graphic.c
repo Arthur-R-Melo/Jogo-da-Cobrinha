@@ -4,11 +4,46 @@
 #include "coord.h"
 
 #include <stdio.h>
+#include <stdbool.h>
 
 //Funções para uso exclusivamente interno, por isso não estão no cabeçalho
 void coordToPosition(Coord coord, float* x, float*y, float resizeFactor);
 void rotateImage(Vector2* vec, float* degree, int direction, float resize);
 void rotateQuina(int pastDir, int newDir, Vector2* vec, float* degree, Rectangle* rec, float resize);
+
+void desenhaTamanhoTela(Jogo* j) {    
+    Vector2 p1 = {LARGURA*j->resize/2 - 100, (ALTURA_JOGO*j->resize+BARRA_ALTURA)/2 - 70};
+    Vector2 p2 = {LARGURA*j->resize/2 - 80, (ALTURA_JOGO*j->resize+BARRA_ALTURA)/2 - 40};
+    Vector2 p3 = {LARGURA*j->resize/2 - 80, (ALTURA_JOGO*j->resize+BARRA_ALTURA)/2 - 100};
+
+    Vector2 p4 = {LARGURA*j->resize/2 + 100, (ALTURA_JOGO*j->resize+BARRA_ALTURA)/2 - 70};
+    Vector2 p5 = {LARGURA*j->resize/2 + 80, (ALTURA_JOGO*j->resize+BARRA_ALTURA)/2 - 40};
+    Vector2 p6 = {LARGURA*j->resize/2 + 80, (ALTURA_JOGO*j->resize+BARRA_ALTURA)/2 - 100};    
+    
+    DrawRectangle(LARGURA*j->resize/2-70, (ALTURA_JOGO*j->resize+BARRA_ALTURA)/2 - 100, 140, 60, WHITE);
+
+    bool hoverT1  = CheckCollisionPointTriangle(GetMousePosition(), p1, p2, p3);
+    bool hoverT2  = CheckCollisionPointTriangle(GetMousePosition(), p4, p5, p6);
+ 
+    if((hoverT1 || hoverT2) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        if (j->resize == STD_WIN_SIZE_FACTOR) j->resize = ALT_WIN_SIZE_FACTOR
+        else j->resize = STD_WIN_SIZE_FACTOR;
+    }
+    Color c1 = WHITE, c2 = WHITE;
+
+    if (j->resize == STD_WIN_SIZE_FACTOR) {
+        int x = (LARGURA*j->resize - MeasureText(STD_SIZE_STR, WIN_SIZE_TXT_FONT_SIZE))/2;
+        DrawText(STD_SIZE_STR, x, (ALTURA_JOGO*j->resize+BARRA_ALTURA)/2 - 85, WIN_SIZE_TXT_FONT_SIZE, WIN_SIZE_TXT_COLOR);
+    }else {
+        int x = (LARGURA*j->resize - MeasureText(ALT_SIZE_STR, WIN_SIZE_TXT_FONT_SIZE))/2;
+        DrawText(ALT_SIZE_STR, x, (ALTURA_JOGO*j->resize+BARRA_ALTURA)/2 - 85, WIN_SIZE_TXT_FONT_SIZE, WIN_SIZE_TXT_COLOR);
+    }
+
+    if (hoverT1) c1 = RED;
+    if (hoverT2) c2 = RED;
+    DrawTriangle(p1, p2, p3, c1);
+    DrawTriangle(p6, p5, p4, c2);
+}
 
 void desenhaDificuldade(Jogo* j){ 
     Vector2 p1 = {LARGURA*j->resize/2 - 100, (ALTURA_JOGO*j->resize+BARRA_ALTURA)/2};

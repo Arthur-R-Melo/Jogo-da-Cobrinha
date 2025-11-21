@@ -4,6 +4,10 @@
 #include "jogo.h"
 
 #define SNAKE_COLOR YELLOW
+#define STD_SIZE_STR "660x700"
+#define ALT_SIZE_STR "825x865"
+#define WIN_SIZE_TXT_COLOR DARKGRAY
+#define WIN_SIZE_TXT_FONT_SIZE 30
 
 void DesenhaBody(Jogo *j);
 void DesenhaFood(Jogo *j);
@@ -25,5 +29,6 @@ void desenhaDificuldade(Jogo* j);
 void DesenhaBarreiras(Jogo *j);
 void CarregaTextureBarreira(Jogo *jogo);
 void DescarregaTextureBarreira(Jogo *jogo);
+void desenhaTamanhoTela(Jogo *Jogo);
 
 #endif

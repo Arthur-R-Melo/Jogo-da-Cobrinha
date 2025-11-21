@@ -17,6 +17,8 @@
 #define DIR_RIGHT 1
 #define DIR_DOWN 2
 #define DIR_LEFT 3
+#define STD_WIN_SIZE_FACTOR 1.0f
+#define ALT_WIN_SIZE_FACTOR 1.25F;
 
 typedef struct Bordas{
     Rectangle pos;

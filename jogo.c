@@ -104,7 +104,7 @@ void IniciaJogo(Jogo *j){
     IniciaPontuacao(j);    
     j->tempo = GetTime();
     j->gameOver = 1;
-    j->resize = 1.25f;
+    j->resize = STD_WIN_SIZE_FACTOR;
 }
 
 void AtualizaDirecao(Jogo *j){

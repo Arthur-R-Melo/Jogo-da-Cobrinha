@@ -52,6 +52,7 @@ int main(){
         
         if(telaAtual == TELA_MENU){
             desenhaDificuldade(&jogo);
+            desenhaTamanhoTela(&jogo);
             DrawText("PRESS ENTER TO START", LARGURA*jogo.resize/2 - 260, (ALTURA_JOGO*jogo.resize+BARRA_ALTURA)/2 + 150, 40, RED);
 
             if(IsKeyPressed(KEY_ENTER)){
