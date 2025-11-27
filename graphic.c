@@ -28,6 +28,7 @@ void desenhaTamanhoTela(Jogo* j) {
     if((hoverT1 || hoverT2) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
         if (j->resize == STD_WIN_SIZE_FACTOR) j->resize = ALT_WIN_SIZE_FACTOR
         else j->resize = STD_WIN_SIZE_FACTOR;
+        SetWindowSize(LARGURA*j->resize, ALTURA_JOGO*j->resize + BARRA_ALTURA);
     }
     Color c1 = WHITE, c2 = WHITE;
 

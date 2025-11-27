@@ -46,7 +46,6 @@ int main(){
     Tela telaAtual = TELA_MENU;
 
     while (!WindowShouldClose()){
-        SetWindowSize(LARGURA*jogo.resize, ALTURA_JOGO*jogo.resize + BARRA_ALTURA);
         BeginDrawing();      
         ClearBackground(BLACK);
         
@@ -84,6 +83,7 @@ int main(){
                 DrawText("Continue", LARGURA*jogo.resize/2 - 65,  (ALTURA_JOGO*jogo.resize+BARRA_ALTURA)/2 + 50, 30, WHITE);
                 if (IsKeyPressed(KEY_ENTER)){
                     IniciaJogo(&jogo);
+                    SetWindowSize(LARGURA*jogo.resize, ALTURA_JOGO*jogo.resize + BARRA_ALTURA);
                     jogo.gameOver = 1;
                     telaAtual = TELA_MENU;
                 }
