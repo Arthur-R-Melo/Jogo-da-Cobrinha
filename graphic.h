@@ -30,5 +30,6 @@ void DesenhaBarreiras(Jogo *j);
 void CarregaTextureBarreira(Jogo *jogo);
 void DescarregaTextureBarreira(Jogo *jogo);
 void desenhaTamanhoTela(Jogo *Jogo);
+void desenhaCaixaNome(Jogo* j);
 
 #endif

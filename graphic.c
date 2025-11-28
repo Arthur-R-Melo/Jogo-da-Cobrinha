@@ -11,6 +11,46 @@ void coordToPosition(Coord coord, float* x, float*y, float resizeFactor);
 void rotateImage(Vector2* vec, float* degree, int direction, float resize);
 void rotateQuina(int pastDir, int newDir, Vector2* vec, float* degree, Rectangle* rec, float resize);
 
+void desenhaCaixaNome(Jogo* j) {
+    static char nome[6] = "";
+    static int nomeLength = 0;
+    static bool typing = false;
+
+    int caixaX = LARGURA*j->resize/2 - 180;
+    int caixaY = (ALTURA_JOGO*j->resize + BARRA_ALTURA)/2 - 190;
+    int caixaW = 360;
+    int caixaH = 60;
+
+    if (CheckCollisionPointRec(GetMousePosition(), (Rectangle){caixaX, caixaY, caixaW, caixaH})) {
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) typing = true;
+    } else {
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) typing = false;
+    }
+
+    if (typing) {
+        int key = GetCharPressed();
+        while (key > 0) {
+            if (key >= 32 && key <= 125 && nomeLength < 5) {
+                nome[nomeLength] = (char)key;
+                nomeLength++;
+                nome[nomeLength] = '\0';
+            }
+            key = GetCharPressed();
+        }
+
+        if (IsKeyPressed(KEY_BACKSPACE) && nomeLength > 0) {
+            nomeLength--;
+            nome[nomeLength] = '\0';
+        }
+    }
+
+    DrawText("Nome:", LARGURA*j->resize/2 - 280, (ALTURA_JOGO*j->resize + BARRA_ALTURA)/2 - 175, 30, WHITE);
+
+    DrawRectangle(caixaX, caixaY, caixaW, caixaH, WHITE);
+    DrawText(nome, caixaX + 10, caixaY + 15, 30, BLACK);
+    DrawRectangleLines(caixaX, caixaY, caixaW, caixaH, typing ? YELLOW : BLACK);
+}
+
 void desenhaTamanhoTela(Jogo* j) {    
     Vector2 p1 = {LARGURA*j->resize/2 - 100, (ALTURA_JOGO*j->resize+BARRA_ALTURA)/2 - 70};
     Vector2 p2 = {LARGURA*j->resize/2 - 80, (ALTURA_JOGO*j->resize+BARRA_ALTURA)/2 - 40};
