@@ -10,6 +10,14 @@
 
 #define TAB_SIZE 16
 
+void IniciaNomeLength(Jogo* j){
+    j->nomeLength = 0;
+}
+
+void IniciaNome(Jogo* j){
+    j->nome = (char*)calloc(6, sizeof(char));
+}
+
 void IniciaPontuacao(Jogo *j){
     j->pontuacao = 0;
 }
@@ -93,7 +101,12 @@ void IniciaFood(Jogo *j){
     j->food.color = FOOD_COLOR;
 }
 
-void IniciaJogo(Jogo *j){
+void IniciaJogo(Jogo *j, int flagNome){
+
+    if(flagNome){
+        IniciaNomeLength(j);
+        IniciaNome(j);
+    }
     IniciaDificuldade(j);
     IniciaPosicoesBarreira(j);
     IniciaQuantBarreiras(j);

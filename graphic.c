@@ -11,9 +11,8 @@ void coordToPosition(Coord coord, float* x, float*y, float resizeFactor);
 void rotateImage(Vector2* vec, float* degree, int direction, float resize);
 void rotateQuina(int pastDir, int newDir, Vector2* vec, float* degree, Rectangle* rec, float resize);
 
-void desenhaCaixaNome(Jogo* j) {
-    static char nome[6] = "";
-    static int nomeLength = 0;
+void desenhaCaixaNome(Jogo* j) {    
+    char* nome = j->nome;
     static bool typing = false;
 
     int caixaX = LARGURA*j->resize/2 - 180;
@@ -30,17 +29,17 @@ void desenhaCaixaNome(Jogo* j) {
     if (typing) {
         int key = GetCharPressed();
         while (key > 0) {
-            if (key >= 32 && key <= 125 && nomeLength < 5) {
-                nome[nomeLength] = (char)key;
-                nomeLength++;
-                nome[nomeLength] = '\0';
+            if (key >= 32 && key <= 125 && j->nomeLength < 5) {
+                nome[j->nomeLength] = (char)key;
+                j->nomeLength++;
+                nome[j->nomeLength] = '\0';
             }
             key = GetCharPressed();
         }
 
-        if (IsKeyPressed(KEY_BACKSPACE) && nomeLength > 0) {
-            nomeLength--;
-            nome[nomeLength] = '\0';
+        if (IsKeyPressed(KEY_BACKSPACE) && j->nomeLength > 0) {
+            j->nomeLength--;
+            nome[j->nomeLength] = '\0';
         }
     }
 

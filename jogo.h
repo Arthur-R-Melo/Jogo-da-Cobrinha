@@ -52,16 +52,20 @@ typedef struct Jogo{
     int posicoesBarreiraMatriz[16][16];
     int quantBarreiras;
     float resize;
+    char* nome;
+    int nomeLength;
 }Jogo;
 
 void IniciaBordas(Jogo *j);
 void IniciaFood(Jogo *j);
-void IniciaJogo(Jogo *j);
+void IniciaJogo(Jogo *j, int flagNome);
 void AtualizaDirecao(Jogo *j);
 void AtualizaPosBody(Jogo *j);
 void AtualizaRodada(Jogo *j);
 int ColisaoFood(Jogo *j);
 int ColisaoBarreira(Jogo* j, Coord coord);
 void AtualizaBordas(Jogo *j);
+void IniciaNome(Jogo* j);
+void IniciaNomeLength(Jogo* j);
 
 #endif
