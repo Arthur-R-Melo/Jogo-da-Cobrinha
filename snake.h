@@ -28,5 +28,5 @@ void removeFromTail(Body* cobra);
 void moveSnake(Body* cobra, Coord coord);
 void growSnake(Body* cobra, Coord coord);
 int isSnakeInCoord(Body* cobra, Coord coord);
-
+void freeSnake(Body* cobra);
 #endif

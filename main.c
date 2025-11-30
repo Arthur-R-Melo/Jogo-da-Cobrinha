@@ -96,6 +96,7 @@ int main(){
                 DrawText(texto, LARGURA*jogo.resize/2 - 150,  (ALTURA_JOGO*jogo.resize+BARRA_ALTURA)/2 - 90, 30, WHITE);
                 DrawText("Continue", LARGURA*jogo.resize/2 - 65,  (ALTURA_JOGO*jogo.resize+BARRA_ALTURA)/2 + 50, 30, WHITE);
                 if (IsKeyPressed(KEY_ENTER)){
+                    freeSnake(&(jogo.body));
                     IniciaJogo(&jogo, 0);
                     SetWindowSize(LARGURA*jogo.resize, ALTURA_JOGO*jogo.resize + BARRA_ALTURA);
                     jogo.gameOver = 1;

@@ -56,3 +56,12 @@ int isSnakeInCoord(Body* cobra, Coord coord) {
     return 0;
     
 }
+
+void freeSnake(Body* snake) {
+    NodePointer atual = snake->tail, temp;
+    while (atual) {
+        temp = atual->prox;
+        free(atual);
+        atual = temp;
+    }
+}
