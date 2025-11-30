@@ -1,11 +1,11 @@
 #ifndef RANKING_H
 #define RANKING_H
 
-#define NAME_SIZE 3
+#define NAME_SIZE 6
 #define RANKING_SIZE 20
-#define HARD_RANKING 1
-#define MEDIUM_RANKING 2
-#define EASY_RANKING 3
+#define HARD_RANKING 2
+#define MEDIUM_RANKING 1
+#define EASY_RANKING 0
 #define EASY_RANKIN_PATH "easyRanking.bin"
 #define MEDIUM_RANKING_PATH "mediumRanking.bin"
 #define HARD_RANKING_PATH "hardRanking.bin"

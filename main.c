@@ -41,6 +41,7 @@ int main(){
     CarregaTexturaComida(&jogo);
     CarregaQuinaCobra(&jogo);
     CarregaTextureBarreira(&jogo);
+    int rankingFlag = 1;
 
     IniciaJogo(&jogo, 1);
 
@@ -79,13 +80,17 @@ int main(){
             } else {
                 char texto[50];            
                 sprintf(texto, "Sua pontuacao foi: %d!", jogo.pontuacao);
-                int indexRanking = isInRanking(jogo.dificuldade, jogo.pontuacao);
-                if (indexRanking) {
-                    Player jogador;
-                    strcpy(jogador.nome, jogo.nome);
-                    jogador.pont = jogo.pontuacao;
-                    addInRanking(jogo.dificuldade, jogador, indexRanking-1);
+                if(rankingFlag) {
+                    int indexRanking = isInRanking(jogo.dificuldade, jogo.pontuacao);
+                    if (indexRanking) {
+                        Player jogador;
+                        strcpy(jogador.nome, jogo.nome);
+                        jogador.pont = jogo.pontuacao;
+                        addInRanking(jogo.dificuldade, jogador, indexRanking-1);
+                    }
+                    rankingFlag = 0;
                 }
+                
                 
                 DrawText("GAME OVER!", LARGURA*jogo.resize/2 - 130,  (ALTURA_JOGO*jogo.resize+BARRA_ALTURA)/2 - 150, 40, RED);
                 DrawText(texto, LARGURA*jogo.resize/2 - 150,  (ALTURA_JOGO*jogo.resize+BARRA_ALTURA)/2 - 90, 30, WHITE);
@@ -94,6 +99,7 @@ int main(){
                     IniciaJogo(&jogo, 0);
                     SetWindowSize(LARGURA*jogo.resize, ALTURA_JOGO*jogo.resize + BARRA_ALTURA);
                     jogo.gameOver = 1;
+                    rankingFlag = 1;
                     telaAtual = TELA_MENU;
                 }
             }
