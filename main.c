@@ -9,6 +9,7 @@
 #include "jogo.h"
 #include "graphic.h"
 #include "food.h"
+#include "ranking.h"
 
 #define LARGURA 660
 #define ALTURA_JOGO 660
@@ -78,6 +79,13 @@ int main(){
             } else {
                 char texto[50];            
                 sprintf(texto, "Sua pontuacao foi: %d!", jogo.pontuacao);
+                int indexRanking = isInRanking(jogo.dificuldade, jogo.pontuacao);
+                if (indexRanking) {
+                    Player jogador;
+                    strcpy(jogador.nome, jogo.nome);
+                    jogador.pont = jogo.pontuacao;
+                    addInRanking(jogo.dificuldade, jogador, indexRanking-1);
+                }
                 
                 DrawText("GAME OVER!", LARGURA*jogo.resize/2 - 130,  (ALTURA_JOGO*jogo.resize+BARRA_ALTURA)/2 - 150, 40, RED);
                 DrawText(texto, LARGURA*jogo.resize/2 - 150,  (ALTURA_JOGO*jogo.resize+BARRA_ALTURA)/2 - 90, 30, WHITE);
