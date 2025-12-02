@@ -11,6 +11,16 @@ void coordToPosition(Coord coord, float* x, float*y, float resizeFactor);
 void rotateImage(Vector2* vec, float* degree, int direction, float resize);
 void rotateQuina(int pastDir, int newDir, Vector2* vec, float* degree, Rectangle* rec, float resize);
 
+
+int desenhaBotaoRanking(Jogo* j){
+    int x = LARGURA*j->resize/2-70, y = (ALTURA_JOGO*j->resize+BARRA_ALTURA)/2 + 40;
+    DrawRectangle(x, y, 140, 60, WHITE);
+    DrawText("Ranking", LARGURA*j->resize/2-MeasureText("Ranking", 30)/2, (ALTURA_JOGO*j->resize+BARRA_ALTURA)/2 + 55, 30, BLACK);
+    int colision = CheckCollisionPointRec(GetMousePosition(), (Rectangle) {x, y, 140, 60});
+    if(colision && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) return 1; 
+    return 0;
+}
+
 void desenhaCaixaNome(Jogo* j) {    
     char* nome = j->nome;
     static bool typing = false;

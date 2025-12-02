@@ -22,7 +22,8 @@
 
 typedef enum {
     TELA_MENU,
-    TELA_JOGO
+    TELA_JOGO,
+    TELA_RANKING
 } Tela;
 
 int main(){
@@ -55,6 +56,7 @@ int main(){
             desenhaDificuldade(&jogo);
             desenhaTamanhoTela(&jogo);
             desenhaCaixaNome(&jogo);
+            desenhaBotaoRanking(&jogo);
             DrawText("PRESS ENTER TO START", LARGURA*jogo.resize/2 - 260, (ALTURA_JOGO*jogo.resize+BARRA_ALTURA)/2 + 150, 40, RED);
 
             if(IsKeyPressed(KEY_ENTER)){

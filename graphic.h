@@ -31,5 +31,6 @@ void CarregaTextureBarreira(Jogo *jogo);
 void DescarregaTextureBarreira(Jogo *jogo);
 void desenhaTamanhoTela(Jogo *Jogo);
 void desenhaCaixaNome(Jogo* j);
+int desenhaBotaoRanking(Jogo* j);
 
 #endif
