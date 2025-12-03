@@ -26,7 +26,8 @@ int desenhaRanking() {
     Vector2 p4 = {GetScreenWidth()/2+ 100, yButton+30};
     Vector2 p5 = {GetScreenWidth()/2+ 80, yButton+60};
     Vector2 p6 = {GetScreenWidth()/2+ 80, yButton};
-
+    int h1 = CheckCollisionPointTriangle(GetMousePosition(), p1, p2, p3);
+    int h2 = CheckCollisionPointTriangle(GetMousePosition(), p4, p5, p6);
     DrawRectangle(xButton, yButton, 140, 60, WHITE);
     if(h1 && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) dificuldade = (dificuldade+2)%3;
     if(h2 && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) dificuldade = (dificuldade+1)%3;
@@ -49,8 +50,6 @@ int desenhaRanking() {
     DrawText(strDif, (GetScreenWidth()-txtLen)/2, 22, 36, cor);
     Color cor1 = WHITE;
     Color cor2 = WHITE;
-    int h1 = CheckCollisionPointTriangle(GetMousePosition(), p1, p2, p3);
-    int h2 = CheckCollisionPointTriangle(GetMousePosition(), p4, p5, p6);
     if(h1) cor1 = RED;
     if(h2) cor2 = RED;
     DrawTriangle(p1, p2, p3, cor1);
