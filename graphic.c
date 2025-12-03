@@ -6,6 +6,7 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
 
 //Funções para uso exclusivamente interno, por isso não estão no cabeçalho
 void coordToPosition(Coord coord, float* x, float*y, float resizeFactor);
@@ -14,8 +15,48 @@ void rotateQuina(int pastDir, int newDir, Vector2* vec, float* degree, Rectangle
 
 int desenhaRanking() {
     static int dificuldade = EASY_RANKING;
+    char strDif[10];
+    Color cor;
 
     if(IsKeyPressed(KEY_ENTER)) return 1;
+    int xButton = GetScreenWidth()/2-70, yButton = 10;
+    Vector2 p1 = {GetScreenWidth()/2- 100, yButton+30};
+    Vector2 p2 = {GetScreenWidth()/2- 80, yButton+60};
+    Vector2 p3 = {GetScreenWidth()/2- 80, yButton};
+    Vector2 p4 = {GetScreenWidth()/2+ 100, yButton+30};
+    Vector2 p5 = {GetScreenWidth()/2+ 80, yButton+60};
+    Vector2 p6 = {GetScreenWidth()/2+ 80, yButton};
+
+    DrawRectangle(xButton, yButton, 140, 60, WHITE);
+    if(h1 && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) dificuldade = (dificuldade+2)%3;
+    if(h2 && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) dificuldade = (dificuldade+1)%3;
+    switch(dificuldade) {
+        case EASY_RANKING:
+            strcpy(strDif, "FÁCIL");
+            cor = GREEN;
+        break;
+        case MEDIUM_RANKING:
+            strcpy(strDif, "MÉDIA");
+            cor = YELLOW;
+        break;
+        case HARD_RANKING:
+        default:
+            strcpy(strDif, "DIFÍCIL");
+            cor = RED;
+        break;
+    }
+    int txtLen = MeasureText(strDif, 36);
+    DrawText(strDif, (GetScreenWidth()-txtLen)/2, 22, 36, cor);
+    Color cor1 = WHITE;
+    Color cor2 = WHITE;
+    int h1 = CheckCollisionPointTriangle(GetMousePosition(), p1, p2, p3);
+    int h2 = CheckCollisionPointTriangle(GetMousePosition(), p4, p5, p6);
+    if(h1) cor1 = RED;
+    if(h2) cor2 = RED;
+    DrawTriangle(p1, p2, p3, cor1);
+    DrawTriangle(p6, p5, p4, cor2);
+
+    Ranking r = getRanking(dificuldade);
 
     return 0;
 }
