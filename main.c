@@ -56,7 +56,7 @@ int main(){
             desenhaDificuldade(&jogo);
             desenhaTamanhoTela(&jogo);
             desenhaCaixaNome(&jogo);
-            desenhaBotaoRanking(&jogo);
+            if(desenhaBotaoRanking(&jogo)) telaAtual = TELA_RANKING;
             DrawText("PRESS ENTER TO START", LARGURA*jogo.resize/2 - 260, (ALTURA_JOGO*jogo.resize+BARRA_ALTURA)/2 + 150, 40, RED);
 
             if(IsKeyPressed(KEY_ENTER)){
@@ -106,6 +106,8 @@ int main(){
                     telaAtual = TELA_MENU;
                 }
             }
+        }else if (telaAtual == TELA_RANKING) {
+            if(desenhaRanking()) telaAtual = TELA_MENU;
         }
         EndDrawing();
     }

@@ -2,6 +2,7 @@
 #include "jogo.h"
 #include "snake.h"
 #include "coord.h"
+#include "ranking.h"
 
 #include <stdio.h>
 #include <stdbool.h>
@@ -11,7 +12,13 @@ void coordToPosition(Coord coord, float* x, float*y, float resizeFactor);
 void rotateImage(Vector2* vec, float* degree, int direction, float resize);
 void rotateQuina(int pastDir, int newDir, Vector2* vec, float* degree, Rectangle* rec, float resize);
 
+int desenhaRanking() {
+    static int dificuldade = EASY_RANKING;
 
+    if(IsKeyPressed(KEY_ENTER)) return 1;
+
+    return 0;
+}
 int desenhaBotaoRanking(Jogo* j){
     int x = LARGURA*j->resize/2-70, y = (ALTURA_JOGO*j->resize+BARRA_ALTURA)/2 + 40;
     DrawRectangle(x, y, 140, 60, WHITE);
