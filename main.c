@@ -58,8 +58,8 @@ int main(){
             desenhaCaixaNome(&jogo);
             if(desenhaBotaoRanking(&jogo)) telaAtual = TELA_RANKING;
             DrawText("PRESS ENTER TO START", LARGURA*jogo.resize/2 - 260, (ALTURA_JOGO*jogo.resize+BARRA_ALTURA)/2 + 150, 40, RED);
-
-            if(IsKeyPressed(KEY_ENTER)){
+            
+            if(IsKeyPressed(KEY_ENTER) && jogo.nomeLength != 0){
                 telaAtual = TELA_JOGO;
             }
         }
