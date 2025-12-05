@@ -54,6 +54,7 @@ typedef struct Jogo{
     float resize;
     char* nome;
     int nomeLength;
+    int flagAlertaNome;
 }Jogo;
 
 void IniciaBordas(Jogo *j);
@@ -67,5 +68,6 @@ int ColisaoBarreira(Jogo* j, Coord coord);
 void AtualizaBordas(Jogo *j);
 void IniciaNome(Jogo* j);
 void IniciaNomeLength(Jogo* j);
+void IniciaFlagAlertaNome(Jogo* j);
 
 #endif

@@ -10,6 +10,10 @@
 
 #define TAB_SIZE 16
 
+void IniciaFlagAlertaNome(Jogo* j){
+    j->flagAlertaNome = 0;
+}
+
 void IniciaNomeLength(Jogo* j){
     j->nomeLength = 0;
 }
@@ -107,6 +111,7 @@ void IniciaJogo(Jogo *j, int flagNome){
         IniciaNomeLength(j);
         IniciaNome(j);
     }
+    IniciaFlagAlertaNome(j);
     IniciaDificuldade(j);
     IniciaPosicoesBarreira(j);
     IniciaQuantBarreiras(j);

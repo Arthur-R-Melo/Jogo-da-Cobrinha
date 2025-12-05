@@ -59,9 +59,19 @@ int main(){
             if(desenhaBotaoRanking(&jogo)) telaAtual = TELA_RANKING;
             DrawText("PRESS ENTER TO START", LARGURA*jogo.resize/2 - 260, (ALTURA_JOGO*jogo.resize+BARRA_ALTURA)/2 + 150, 40, RED);
             
-            if(IsKeyPressed(KEY_ENTER) && jogo.nomeLength != 0){
-                telaAtual = TELA_JOGO;
+            if(IsKeyPressed(KEY_ENTER) ){
+                if(jogo.nomeLength == 0){
+                    jogo.flagAlertaNome = 1;
+                }else{
+                    telaAtual = TELA_JOGO;
+                }
             }
+
+            if(jogo.flagAlertaNome){
+                if(((int)(GetTime() * 2)) % 2 == 0){
+                    DrawText("ESCREVA O SEU NOME", LARGURA*jogo.resize/2 - 180, (ALTURA_JOGO * jogo.resize + BARRA_ALTURA) / 2 - 250, 30, RED);
+                }                
+            } 
         }
 
         else if(telaAtual == TELA_JOGO){

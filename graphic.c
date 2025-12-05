@@ -133,8 +133,7 @@ void desenhaCaixaNome(Jogo *j) {
     }
   }
 
-  DrawText("Nome:", LARGURA * j->resize / 2 - 280,
-           (ALTURA_JOGO * j->resize + BARRA_ALTURA) / 2 - 175, 30, WHITE);
+  DrawText("Nome:", LARGURA * j->resize / 2 - 280, (ALTURA_JOGO * j->resize + BARRA_ALTURA) / 2 - 175, 30, WHITE);
 
   DrawRectangle(caixaX, caixaY, caixaW, caixaH, WHITE);
   DrawText(nome, caixaX + 10, caixaY + 15, 30, BLACK);
