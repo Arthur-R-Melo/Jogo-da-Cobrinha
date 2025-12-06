@@ -7,12 +7,9 @@
 #include "snake.h"
 #include "food.h"
 #include "jogo.h"
+#include "sound.h"
 
 #define TAB_SIZE 16
-
-void IniciaFlagAlertaNome(Jogo* j){
-    j->flagAlertaNome = 0;
-}
 
 void IniciaNomeLength(Jogo* j){
     j->nomeLength = 0;
@@ -111,7 +108,6 @@ void IniciaJogo(Jogo *j, int flagNome){
         IniciaNomeLength(j);
         IniciaNome(j);
     }
-    IniciaFlagAlertaNome(j);
     IniciaDificuldade(j);
     IniciaPosicoesBarreira(j);
     IniciaQuantBarreiras(j);
@@ -180,21 +176,25 @@ void AtualizaPosBody(Jogo *j){
 
     if(coord.x < 0 || coord.x > 15 || coord.y < 0 || coord.y > 15){
         j->gameOver = 0;
+        PlaySound(j->hit);
         return;
     }
 
     if(j->dificuldade == 2 && ColisaoBarreira(j, coord)){
         j->gameOver = 0;
+        PlaySound(j->hit);
         return;
     }
 
     if (isSnakeInCoord(&(j->body), coord) && !(!ColisaoFood(j) && compareCoord(coord, j->body.tail->coord))){
         j->gameOver = 0;
+        PlaySound(j->hit);
         return;
     }
     
     if (ColisaoFood(j))
     {
+        PlaySound(j->foodSound);
         growSnake(&(j->body), coord);
         mudaCoordFood(j);
         j->pontuacao++;
