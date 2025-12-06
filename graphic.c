@@ -8,6 +8,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 
 // Funções para uso exclusivamente interno, por isso não estão no cabeçalho
 void coordToPosition(Coord coord, float *x, float *y, float resizeFactor);
@@ -133,7 +134,8 @@ void desenhaCaixaNome(Jogo *j) {
     }
   }
 
-  DrawText("Nome:", LARGURA * j->resize / 2 - 280, (ALTURA_JOGO * j->resize + BARRA_ALTURA) / 2 - 175, 30, WHITE);
+  DrawText("Nome:", LARGURA * j->resize / 2 - 280,
+           (ALTURA_JOGO * j->resize + BARRA_ALTURA) / 2 - 175, 30, WHITE);
 
   DrawRectangle(caixaX, caixaY, caixaW, caixaH, WHITE);
   DrawText(nome, caixaX + 10, caixaY + 15, 30, BLACK);
@@ -318,18 +320,30 @@ void DesenhaBody(Jogo *j) {
 }
 
 void DesenhaFood(Jogo *j) {
-  float x, y;
-  coordToPosition(j->food.coord, &x, &y, j->resize);
-  Rectangle rec;
-  rec.width = STD_SIZE_X * j->resize;
-  rec.height = STD_SIZE_Y * j->resize;
-  rec.x = x;
-  rec.y = y;
+    float x, y;
+    coordToPosition(j->food.coord, &x, &y, j->resize);
 
-  DrawTexturePro(j->foodTexture.texture,
-                 (Rectangle){0, 0, j->foodTexture.texture.width,
-                             j->foodTexture.texture.height},
-                 rec, (Vector2){0, 0}, 0.0f, WHITE);
+    float baseW = STD_SIZE_X * j->resize;
+    float baseH = STD_SIZE_Y * j->resize;
+
+    //animação//
+    float pulse = sinf(GetTime() * 4) * 0.15f;
+    float scale = 1.0f + pulse;
+
+    Rectangle rec;
+    rec.width  = baseW * scale;
+    rec.height = baseH * scale;
+    rec.x = x + (baseW - rec.width) / 2;
+    rec.y = y + (baseH - rec.height) / 2;
+
+    DrawTexturePro(
+        j->foodTexture.texture,
+        (Rectangle){0, 0, j->foodTexture.texture.width, j->foodTexture.texture.height},
+        rec,
+        (Vector2){0, 0},
+        0.0f,
+        WHITE
+    );
 }
 
 void DesenhaBordas(Jogo *j) {
@@ -361,7 +375,14 @@ void CarregaTextureBarreira(Jogo *jogo) {
 void DescarregaTextureBarreira(Jogo *jogo) { UnloadTexture(jogo->barreira); }
 
 Texture2D CarregaTextureFundo(Jogo *jogo) {
-  Texture2D fundo = LoadTexture("assets/background2.png");
+  Texture2D fundo;
+  if(jogo->dificuldade == 0){
+    fundo = LoadTexture("assets/mapa1.png");
+  }else if(jogo->dificuldade == 1){
+    fundo = LoadTexture("assets/veaine.png");
+  }else{
+    fundo = LoadTexture("assets/sefuere.png");
+  }
   return fundo;
 }
 
