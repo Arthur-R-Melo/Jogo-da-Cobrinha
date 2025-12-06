@@ -53,6 +53,7 @@ int desenhaRanking() {
   }
   int txtLen = MeasureText(strDif, 36);
   DrawText(strDif, (GetScreenWidth() - txtLen) / 2, 22, 36, cor);
+  DrawText("ENTER para voltar", 5, 10, 20, GRAY);
   Color cor1 = WHITE;
   Color cor2 = WHITE;
   if (h1)
