@@ -65,11 +65,11 @@ void IniciaPosicoesBarreira(Jogo *j){
     j->posicoesBarreira[9] = (Coord){2, 4};
     j->posicoesBarreira[10] = (Coord){6, 12};
     j->posicoesBarreira[11] = (Coord){15, 12};
-    j->posicoesBarreira[12] = (Coord){11, 10};
+    j->posicoesBarreira[12] = (Coord){11, 11};
     j->posicoesBarreira[13] = (Coord){12, 14};
     j->posicoesBarreira[14] = (Coord){13, 1};
     j->posicoesBarreira[15] = (Coord){8, 3};
-    j->posicoesBarreira[16] = (Coord){5, 5};
+    j->posicoesBarreira[16] = (Coord){1, 1};
     j->posicoesBarreira[17] = (Coord){3, 3};
 }
 
@@ -97,9 +97,16 @@ void AtualizaBordas(Jogo *j) {
 
 void IniciaFood(Jogo *j){
     Coord tempCoord = (Coord) {rand()%16, rand()%16};
-    while(tempCoord.x == 7 && tempCoord.y == 15){
-        tempCoord = (Coord) {rand()%16, rand()%16};
-    }
+
+    if(j->dificuldade == 2){
+        while( (tempCoord.x == 7 && tempCoord.y == 15) || ColisaoBarreira(j, tempCoord) ){
+            tempCoord = (Coord) {rand()%16, rand()%16};            
+        }
+    }else{
+        while(tempCoord.x == 7 && tempCoord.y == 15){
+            tempCoord = (Coord) {rand()%16, rand()%16};
+        }
+    }    
 
     j->food.coord = tempCoord;
     j->food.color = FOOD_COLOR;
@@ -117,8 +124,7 @@ void IniciaJogo(Jogo *j, int flagNome){
     IniciaQuantBarreiras(j);
     IniciaMatrizBarreiras(j);
     IniciaBordas(j);
-    IniciaBody(j);
-    IniciaFood(j);
+    IniciaBody(j);    
     IniciaPontuacao(j);    
     j->tempo = GetTime();
     j->gameOver = 1;

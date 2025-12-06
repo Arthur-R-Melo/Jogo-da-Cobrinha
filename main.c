@@ -64,6 +64,7 @@ int main(){
                 if(jogo.nomeLength == 0){
                     jogo.flagAlertaNome = 1;
                 }else{
+                    IniciaFood(&jogo);
                     telaAtual = TELA_JOGO;
                 }
             }

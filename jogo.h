@@ -64,10 +64,12 @@ void AtualizaDirecao(Jogo *j);
 void AtualizaPosBody(Jogo *j);
 void AtualizaRodada(Jogo *j);
 int ColisaoFood(Jogo *j);
+void IniciaPosicoesBarreira(Jogo *j);
 int ColisaoBarreira(Jogo* j, Coord coord);
 void AtualizaBordas(Jogo *j);
 void IniciaNome(Jogo* j);
 void IniciaNomeLength(Jogo* j);
 void IniciaFlagAlertaNome(Jogo* j);
+void IniciaFood(Jogo *j);
 
 #endif
