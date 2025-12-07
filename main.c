@@ -73,6 +73,7 @@ int main(){
             desenhaTamanhoTela(&jogo);
             desenhaCaixaNome(&jogo);
             if(desenhaBotaoRanking(&jogo)) telaAtual = TELA_RANKING;
+            DrawText("MENU", LARGURA*jogo.resize/2 - 55, (ALTURA_JOGO*jogo.resize+BARRA_ALTURA)/2 - 325, 40, YELLOW);
             DrawText("PRESS ENTER TO START", LARGURA*jogo.resize/2 - 260, (ALTURA_JOGO*jogo.resize+BARRA_ALTURA)/2 + 150, 40, RED);
             
             if(IsKeyPressed(KEY_ENTER) ){
