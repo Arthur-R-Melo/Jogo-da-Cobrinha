@@ -55,6 +55,10 @@ typedef struct Jogo{
     char* nome;
     int nomeLength;
     int flagAlertaNome;
+    Sound hit;
+    Sound foodSound;
+    Music dif;
+    Music menu;
 }Jogo;
 
 void IniciaBordas(Jogo *j);
@@ -71,5 +75,4 @@ void IniciaNome(Jogo* j);
 void IniciaNomeLength(Jogo* j);
 void IniciaFlagAlertaNome(Jogo* j);
 void IniciaFood(Jogo *j);
-
 #endif

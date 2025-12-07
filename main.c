@@ -9,6 +9,7 @@
 #include "jogo.h"
 #include "graphic.h"
 #include "food.h"
+#include "sound.h"
 #include "ranking.h"
 
 #define LARGURA 660
@@ -31,6 +32,7 @@ int main(){
 
     //Cria a janela;
     InitWindow(LARGURA, ALTURA_TOTAL, "Snake Game");
+    InitAudioDevice();
     SetTargetFPS(60);
     srand(time(NULL)); 
 
@@ -38,11 +40,16 @@ int main(){
     CarregaRabo(&jogo);
     CarregaCabeca(&jogo);
     CarregaBody(&jogo);
-    Fundo = CarregaTextureFundo(&jogo); 
+    //Fundo = CarregaTextureFundo(&jogo); 
     CarregaTexturaComida(&jogo);
     CarregaQuinaCobra(&jogo);
     CarregaTextureBarreira(&jogo);
+    CarregaSons(&jogo);
+    CarregaMusicaMenu(&jogo);
+
     int rankingFlag = 1;
+    int musicaMenuTocando = 0;
+    int musicaDifTocando = 0;
 
     IniciaJogo(&jogo, 1);
 
@@ -53,11 +60,19 @@ int main(){
         ClearBackground(BLACK);
         
         if(telaAtual == TELA_MENU){
+            if (!musicaMenuTocando) {
+                PlayMusicStream(jogo.menu);
+                musicaMenuTocando = 1;
+            }
+            if (musicaDifTocando) {
+                StopMusicStream(jogo.dif);
+                musicaDifTocando = 0;
+            }
+            UpdateMusicStream(jogo.menu);
             desenhaDificuldade(&jogo);
             desenhaTamanhoTela(&jogo);
             desenhaCaixaNome(&jogo);
             if(desenhaBotaoRanking(&jogo)) telaAtual = TELA_RANKING;
-            DrawText("MENU", LARGURA*jogo.resize/2 - 55, (ALTURA_JOGO*jogo.resize+BARRA_ALTURA)/2 - 325, 40, YELLOW);
             DrawText("PRESS ENTER TO START", LARGURA*jogo.resize/2 - 260, (ALTURA_JOGO*jogo.resize+BARRA_ALTURA)/2 + 150, 40, RED);
             
             if(IsKeyPressed(KEY_ENTER) ){
@@ -66,17 +81,26 @@ int main(){
                 }else{
                     IniciaFood(&jogo);
                     telaAtual = TELA_JOGO;
+                    StopMusicStream(jogo.menu);
+                    musicaMenuTocando = 0;
+                    CarregaMusicaDif(&jogo);
+                    Fundo = CarregaTextureFundo(&jogo); 
+                    PlayMusicStream(jogo.dif);
+                    musicaDifTocando = 1;
                 }
+                
             }
-
             if(jogo.flagAlertaNome){
                 if(((int)(GetTime() * 2)) % 2 == 0){
                     DrawText("ESCREVA O SEU NOME", LARGURA*jogo.resize/2 - 180, (ALTURA_JOGO * jogo.resize + BARRA_ALTURA) / 2 - 250, 30, RED);
                 }                
-            } 
+            }
         }
 
         else if(telaAtual == TELA_JOGO){
+            if (musicaDifTocando) {
+                UpdateMusicStream(jogo.dif);
+            }
             DrawTexturePro(Fundo, (Rectangle) {0, 0, LARGURA, ALTURA_JOGO},
              (Rectangle) {0, BARRA_ALTURA, LARGURA*jogo.resize, ALTURA_JOGO*jogo.resize}, (Vector2) {0,0}, 0.0f,WHITE);
             AtualizaBordas(&jogo);
@@ -92,6 +116,10 @@ int main(){
                 jogo.gameOver = 0;
                 }*/
             } else {
+                if (musicaDifTocando) {
+                    StopMusicStream(jogo.dif);
+                    musicaDifTocando = 0;
+                }
                 char texto[50];            
                 sprintf(texto, "Sua pontuacao foi: %d!", jogo.pontuacao);
                 if(rankingFlag) {
@@ -116,13 +144,22 @@ int main(){
                     jogo.gameOver = 1;
                     rankingFlag = 1;
                     telaAtual = TELA_MENU;
+                    PlayMusicStream(jogo.menu);
+                    musicaMenuTocando = 1;
                 }
             }
         }else if (telaAtual == TELA_RANKING) {
+            if (!musicaMenuTocando) {
+                PlayMusicStream(jogo.menu);
+                musicaMenuTocando = 1;
+            }
+            UpdateMusicStream(jogo.menu);
             if(desenhaRanking()) telaAtual = TELA_MENU;
         }
         EndDrawing();
     }
+    DescarregaMusicaMenu(&jogo);
+    DescarregaMusicaDif(&jogo);
     DescarregaRabo(&jogo);
     DescarregaCabeca(&jogo);
     DescarregaBody(&jogo);
@@ -130,6 +167,8 @@ int main(){
     DescarregaTexturaComida(&jogo);
     DescarregaQuinaCobra(&jogo);
     DescarregaTextureBarreira(&jogo);
+    DescarregaSons(&jogo);
+    CloseAudioDevice();
     CloseWindow();
     return 0;
 }
